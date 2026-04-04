@@ -1,0 +1,26 @@
+# Validate commit messages
+commit-msg:
+  commands:
+    commitlint:
+      run: bunx --no -- commitlint --edit {1}
+
+# Validate content before committing
+pre-commit:
+  commands:
+    lint:
+      glob: '*.{ts,tsx}'
+      run: bun run lint
+      stage_fixed: true
+      priority: 1
+    check-types:
+      glob: '*.{ts,tsx}'
+      run: bun run typecheck
+      priority: 2
+
+# Validate content before committing
+pre-push:
+  commands:
+    build:
+      glob: '*'
+      run: bun run build
+      stage_fixed: true
