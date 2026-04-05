@@ -21,6 +21,7 @@ There is **no test framework** configured in this project.
 ## Git Hooks (Lefthook)
 
 Hooks run automatically — do not bypass them:
+
 - **pre-commit**: `lint` + `typecheck` on staged `*.ts`/`*.tsx` files
 - **commit-msg**: Enforces [Conventional Commits](https://www.conventionalcommits.org/) format (`feat:`, `fix:`, `chore:`, etc.)
 - **pre-push**: Full `build`
@@ -45,6 +46,7 @@ Hooks run automatically — do not bypass them:
 ## CI Pipeline
 
 GitHub Actions (`.github/workflows/ci.yml`) runs on push/PR to `main`/`master`:
+
 1. `bun install --frozen-lockfile`
 2. `bun run lint`
 3. `bun run typecheck`
