@@ -4,12 +4,12 @@
     "frontend-design": {
       "source": "anthropics/skills",
       "sourceType": "github",
-      "computedHash": "516bd2154eb843a8240e43d5b285229129853114ad7075a5e141e1c08e408c84"
+      "computedHash": "063a0e6448123cd359ad0044cc46b0e490cc7964d45ef4bb9fd842bd2ffbca67"
     },
     "heroui-react": {
       "source": "heroui-inc/heroui",
       "sourceType": "github",
-      "computedHash": "eb416399a9856a04152d36ef07396274e3bf0fff8f12f3e09bf610e5625dd58d"
+      "computedHash": "692cc86ded65b603961fa1bc5685670e2976a3a6e1459187c210b415e8dfeb1e"
     },
     "vercel-react-best-practices": {
       "source": "vercel-labs/agent-skills",
