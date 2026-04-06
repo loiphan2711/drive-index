@@ -1,7 +1,7 @@
 'use client';
 
 import type { ComponentPropsWithoutRef, ReactNode } from 'react';
-import type { SearchCategory } from '@/constants/search';
+import type { SearchCategory } from '@/type/search-dialog';
 
 import * as Dialog from '@radix-ui/react-dialog';
 import { Command } from 'cmdk';
@@ -21,87 +21,27 @@ import {
   QUICK_ACTIONS,
   RECENT_ITEMS,
   SEARCH_CATEGORIES,
-  SEARCH_CATEGORY_LOOKUP,
 } from '@/constants/search';
-import { highlightMatch } from '@/lib/highlightMatch';
+import { CategoryBadge } from './CategoryBadge';
+
+import { CountBadge } from './CountBadge';
+import { FilterTag } from './FilterTag';
+import { ShortcutKey } from './ShortcutKey';
+import { highlightMatch } from './utils';
 
 const SEARCH_TERM_SPLIT_PATTERN = /\s+/;
 
-type SearchModalProps = {
+type SearchModalDialogProps = {
   onOpenChange: (open: boolean) => void;
   open: boolean;
+  trigger?: (open: boolean) => ReactNode;
 };
 
-function CategoryBadge({ category }: { category: SearchCategory }) {
-  const meta = SEARCH_CATEGORY_LOOKUP[category];
-  const Icon = meta.icon;
-
-  return (
-    <span
-      className={`inline-flex items-center gap-1.5 rounded-full border px-2.5 py-1 text-[10px] font-semibold uppercase tracking-[0.22em] ${meta.color}`}
-    >
-      <Icon aria-hidden className="size-3" />
-      {category}
-    </span>
-  );
-}
-
-function FilterTag({
-  active,
-  category,
-  onToggle,
-}: {
-  active: boolean;
-  category: SearchCategory;
-  onToggle: (category: SearchCategory) => void;
-}) {
-  const meta = SEARCH_CATEGORY_LOOKUP[category];
-  const Icon = meta.icon;
-
-  return (
-    <button
-      aria-pressed={active}
-      className={`inline-flex items-center gap-2 rounded-full border px-3 py-1.5 text-[11px] font-semibold uppercase tracking-[0.18em] transition-colors ${
-        active
-          ? meta.color
-          : 'border-(--cmdk-kbd-border) bg-(--cmdk-icon-bg) text-(--cmdk-text-muted) hover:border-(--cmdk-item-hover-border) hover:bg-(--cmdk-item-hover-bg) hover:text-(--cmdk-text)'
-      }`}
-      onClick={() => onToggle(category)}
-      type="button"
-    >
-      <Icon aria-hidden className="size-3.5" />
-      {category}
-    </button>
-  );
-}
-
-function CountBadge({ value }: { value: number }) {
-  return (
-    <span className="inline-flex min-w-7 items-center justify-center rounded-full border border-(--cmdk-kbd-border) bg-(--cmdk-icon-bg) px-2 py-1 text-[11px] font-semibold text-(--cmdk-kbd-text)">
-      {value}
-    </span>
-  );
-}
-
-function ShortcutKey({
-  children,
-  wide = false,
-}: {
-  children: ReactNode;
-  wide?: boolean;
-}) {
-  return (
-    <kbd
-      className={`inline-flex h-7 items-center justify-center rounded-lg border border-(--cmdk-kbd-border) bg-(--cmdk-kbd-bg) px-2 text-[11px] font-semibold uppercase tracking-[0.18em] text-(--cmdk-kbd-text) shadow-[inset_0_1px_0_var(--cmdk-kbd-inset)] ${
-        wide ? 'min-w-10' : 'min-w-7'
-      }`}
-    >
-      {children}
-    </kbd>
-  );
-}
-
-export const SearchModal = ({ onOpenChange, open }: SearchModalProps) => {
+export const SearchModalDialog = ({
+  onOpenChange,
+  open,
+  trigger,
+}: SearchModalDialogProps) => {
   const inputRef = useRef<HTMLInputElement>(null);
   const [query, setQuery] = useState('');
   const [activeFilters, setActiveFilters] = useState<Set<SearchCategory>>(
@@ -192,6 +132,9 @@ export const SearchModal = ({ onOpenChange, open }: SearchModalProps) => {
 
   return (
     <Dialog.Root onOpenChange={handleOpenChange} open={open}>
+      {trigger ? (
+        <Dialog.Trigger asChild>{trigger(open)}</Dialog.Trigger>
+      ) : null}
       <Dialog.Portal>
         <Dialog.Overlay {...overlayProps} />
         <div className="cmdk-dialog-shell">

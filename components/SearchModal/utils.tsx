@@ -2,7 +2,7 @@ import type { ReactNode } from 'react';
 
 const REGEX_ESCAPE_PATTERN = /[.*+?^${}()|[\]\\]/g;
 
-export function highlightMatch(text: string, query: string): ReactNode {
+export const highlightMatch = (text: string, query: string): ReactNode => {
   const normalizedQuery = query.trim();
 
   if (normalizedQuery.length === 0) {
@@ -24,11 +24,11 @@ export function highlightMatch(text: string, query: string): ReactNode {
 
     return (
       <mark
-        className="rounded-md bg-[var(--cmdk-highlight-bg)] px-1 py-0.5 font-medium text-[var(--cmdk-highlight-text)]"
+        className="rounded-md bg-(--cmdk-highlight-bg) px-1 py-0.5 font-medium text-(--cmdk-highlight-text)"
         key={`${part}-${index}`}
       >
         {part}
       </mark>
     );
   });
-}
+};

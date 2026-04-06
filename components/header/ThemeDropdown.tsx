@@ -4,14 +4,22 @@ import type { Key } from 'react';
 import type { Theme } from '@/context/theme';
 
 import { Dropdown } from '@heroui/react';
-import { Check, Monitor, Moon, Sun } from 'lucide-react';
+import { Check } from 'lucide-react';
 import { startTransition, useSyncExternalStore } from 'react';
 
 import { THEME_ICONS } from '@/constants/icon';
+import { THEMES } from '@/context/theme';
 import { useTheme } from '@/context/useTheme';
+
+const THEME_LABELS: Record<Theme, string> = {
+  light: 'Light',
+  dark: 'Dark',
+  system: 'System',
+};
 
 export const ThemeDropdown = () => {
   const { setTheme, theme } = useTheme();
+  // Check if the component is mounted to avoid hydration mismatch when rendering theme icons on the server
   const mounted = useSyncExternalStore(
     () => () => {},
     () => true,
@@ -39,40 +47,24 @@ export const ThemeDropdown = () => {
       >
         {THEME_ICONS[currentTheme]}
       </Dropdown.Trigger>
-      <Dropdown.Popover placement="bottom end">
+      <Dropdown.Popover placement="bottom end" className="min-w-44">
         <Dropdown.Menu
           aria-label="Select theme"
           onAction={handleAction}
           selectedKeys={new Set([currentTheme])}
           selectionMode="single"
         >
-          <Dropdown.Item id="light" textValue="Light">
-            <div className="flex items-center gap-2">
-              <Sun aria-hidden className="size-4" />
-              <span>Light</span>
-              {currentTheme === 'light' && (
-                <Check aria-hidden className="ml-auto size-4" />
-              )}
-            </div>
-          </Dropdown.Item>
-          <Dropdown.Item id="dark" textValue="Dark">
-            <div className="flex items-center gap-2">
-              <Moon aria-hidden className="size-4" />
-              <span>Dark</span>
-              {currentTheme === 'dark' && (
-                <Check aria-hidden className="ml-auto size-4" />
-              )}
-            </div>
-          </Dropdown.Item>
-          <Dropdown.Item id="system" textValue="System">
-            <div className="flex items-center gap-2">
-              <Monitor aria-hidden className="size-4" />
-              <span>System</span>
-              {currentTheme === 'system' && (
-                <Check aria-hidden className="ml-auto size-4" />
-              )}
-            </div>
-          </Dropdown.Item>
+          {THEMES.map((t) => (
+            <Dropdown.Item key={t} id={t} textValue={THEME_LABELS[t]}>
+              <div className="flex items-center gap-2 w-full">
+                {THEME_ICONS[t]}
+                <span>{THEME_LABELS[t]}</span>
+                {currentTheme === t && (
+                  <Check aria-hidden className="ml-auto size-4" />
+                )}
+              </div>
+            </Dropdown.Item>
+          ))}
         </Dropdown.Menu>
       </Dropdown.Popover>
     </Dropdown>

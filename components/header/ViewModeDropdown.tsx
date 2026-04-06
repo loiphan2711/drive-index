@@ -3,7 +3,7 @@
 import type { Key } from 'react';
 
 import { Dropdown } from '@heroui/react';
-import { LayoutGrid, Rows3 } from 'lucide-react';
+import { Check, LayoutGrid, Rows3 } from 'lucide-react';
 import { startTransition } from 'react';
 
 import { useViewMode } from '@/context/useViewMode';
@@ -31,7 +31,7 @@ export const ViewModeDropdown = () => {
           <Rows3 aria-hidden className="size-4" />
         )}
       </Dropdown.Trigger>
-      <Dropdown.Popover placement="bottom end">
+      <Dropdown.Popover placement="bottom end" className="min-w-44">
         <Dropdown.Menu
           aria-label="Select view mode"
           onAction={handleAction}
@@ -39,15 +39,21 @@ export const ViewModeDropdown = () => {
           selectionMode="single"
         >
           <Dropdown.Item id="grid" textValue="Grid">
-            <div className="flex items-center gap-2">
+            <div className="flex w-full items-center gap-2">
               <LayoutGrid aria-hidden className="size-4" />
               <span>Grid</span>
+              {viewMode === 'grid' && (
+                <Check aria-hidden className="ml-auto size-4" />
+              )}
             </div>
           </Dropdown.Item>
           <Dropdown.Item id="table" textValue="Table">
-            <div className="flex items-center gap-2">
+            <div className="flex w-full items-center gap-2">
               <Rows3 aria-hidden className="size-4" />
               <span>Table</span>
+              {viewMode === 'table' && (
+                <Check aria-hidden className="ml-auto size-4" />
+              )}
             </div>
           </Dropdown.Item>
         </Dropdown.Menu>
