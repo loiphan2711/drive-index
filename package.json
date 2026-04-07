@@ -13,6 +13,8 @@
   "dependencies": {
     "@heroui/react": "^3.0.2",
     "@heroui/styles": "^3.0.2",
+    "@supabase/ssr": "^0.10.0",
+    "@supabase/supabase-js": "^2.102.1",
     "cmdk": "^1.1.1",
     "lucide-react": "^1.7.0",
     "next": "16.2.2",
