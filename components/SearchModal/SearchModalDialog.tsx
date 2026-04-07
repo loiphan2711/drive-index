@@ -5,7 +5,13 @@ import type { SearchCategory } from '@/type/search-dialog';
 
 import * as Dialog from '@radix-ui/react-dialog';
 import { Command } from 'cmdk';
-import { Command as CommandIcon, FileSearch, Hash, Search } from 'lucide-react';
+import {
+  Command as CommandIcon,
+  FileSearch,
+  Hash,
+  Search,
+  X,
+} from 'lucide-react';
 import {
   startTransition,
   useCallback,
@@ -141,7 +147,7 @@ export const SearchModalDialog = ({
           <Dialog.Content
             {...contentProps}
             aria-label="Search drive"
-            className="max-h-full w-full max-w-3xl outline-none"
+            className="flex max-h-full min-h-0 w-full max-w-3xl outline-none"
             onEscapeKeyDown={(event) => {
               event.preventDefault();
               handleOpenChange(false);
@@ -157,30 +163,40 @@ export const SearchModalDialog = ({
             </Dialog.Description>
 
             <Command
-              className="flex max-h-full w-full flex-col overflow-hidden rounded-[2rem] border border-(--cmdk-panel-border) backdrop-blur-2xl"
+              className="flex min-h-0 max-h-full w-full flex-1 flex-col overflow-hidden rounded-[2rem] border border-(--cmdk-panel-border) text-[13px] sm:text-sm"
               loop
               shouldFilter={false}
             >
               <div className="border-b border-(--cmdk-divider) px-4 py-4 sm:px-6">
-                <div className="flex items-center gap-3 rounded-[1.35rem] border border-(--cmdk-input-border) bg-(--cmdk-input-bg) px-4 py-3 shadow-[inset_0_1px_0_var(--cmdk-input-inset)]">
-                  <Search
-                    aria-hidden
-                    className="size-4 shrink-0 text-(--cmdk-text-muted)"
-                  />
-                  <Command.Input
-                    aria-label="Search query"
-                    className="flex-1 bg-transparent text-[15px] text-(--cmdk-text) outline-none placeholder:text-(--cmdk-text-faint)"
-                    onValueChange={setQuery}
-                    placeholder="Search documents, workflows, or actions..."
-                    ref={inputRef}
-                    value={query}
-                  />
-                  <div className="hidden items-center gap-1 sm:flex">
-                    <ShortcutKey>
-                      <CommandIcon aria-hidden className="size-3.5" />
-                    </ShortcutKey>
-                    <ShortcutKey>K</ShortcutKey>
+                <div className="flex min-w-0 items-center gap-2 sm:gap-3">
+                  <div className="flex min-w-0 flex-1 items-center gap-3 rounded-[1.35rem] border border-(--cmdk-input-border) bg-(--cmdk-input-bg) px-4 py-3 shadow-[inset_0_1px_0_var(--cmdk-input-inset)]">
+                    <Search
+                      aria-hidden
+                      className="size-4 shrink-0 text-(--cmdk-text-muted)"
+                    />
+                    <Command.Input
+                      aria-label="Search query"
+                      className="w-0 min-w-0 flex-1 bg-transparent text-sm text-(--cmdk-text) outline-none placeholder:text-(--cmdk-text-faint) sm:text-[15px]"
+                      onValueChange={setQuery}
+                      placeholder="Search documents, workflows, or actions..."
+                      ref={inputRef}
+                      value={query}
+                    />
+                    <div className="hidden items-center gap-1 sm:flex">
+                      <ShortcutKey>
+                        <CommandIcon aria-hidden className="size-3.5" />
+                      </ShortcutKey>
+                      <ShortcutKey>K</ShortcutKey>
+                    </div>
                   </div>
+                  <button
+                    aria-label="Close search dialog"
+                    className="flex size-8 shrink-0 items-center justify-center rounded-full border border-(--cmdk-kbd-border) bg-(--cmdk-kbd-bg) text-(--cmdk-text-muted) transition-colors hover:text-(--cmdk-text) sm:size-9"
+                    onClick={handleClose}
+                    type="button"
+                  >
+                    <X aria-hidden className="size-4" />
+                  </button>
                 </div>
 
                 {!hasQuery ? (
@@ -195,7 +211,7 @@ export const SearchModalDialog = ({
                     ))}
                   </div>
                 ) : activeFilters.size > 0 ? (
-                  <div className="mt-3 flex items-center gap-2 text-xs text-(--cmdk-text-muted)">
+                  <div className="mt-3 flex items-center gap-2 text-[11px] text-(--cmdk-text-muted) sm:text-xs">
                     <Hash aria-hidden className="size-3.5" />
                     <p>
                       Filtered by {activeFilters.size} tag
@@ -223,10 +239,10 @@ export const SearchModalDialog = ({
                               <Icon aria-hidden className="size-4" />
                             </span>
                             <div className="min-w-0 flex-1">
-                              <p className="truncate text-sm font-medium text-(--cmdk-text)">
+                              <p className="truncate text-[13px] font-medium text-(--cmdk-text) sm:text-sm">
                                 {item.label}
                               </p>
-                              <p className="mt-1 text-xs text-(--cmdk-text-muted)">
+                              <p className="mt-1 truncate text-[11px] text-(--cmdk-text-muted) sm:text-xs">
                                 {item.detail}
                               </p>
                             </div>
@@ -256,10 +272,10 @@ export const SearchModalDialog = ({
                               <Icon aria-hidden className="size-4" />
                             </span>
                             <div className="min-w-0 flex-1">
-                              <p className="truncate text-sm font-medium text-(--cmdk-text)">
+                              <p className="truncate text-[13px] font-medium text-(--cmdk-text) sm:text-sm">
                                 {action.label}
                               </p>
-                              <p className="mt-1 text-xs text-(--cmdk-text-muted)">
+                              <p className="mt-1 truncate text-[11px] text-(--cmdk-text-muted) sm:text-xs">
                                 {action.description}
                               </p>
                             </div>
@@ -273,7 +289,7 @@ export const SearchModalDialog = ({
                   </>
                 ) : (
                   <>
-                    <Command.Empty className="px-4 py-14 text-center text-sm text-(--cmdk-text-muted)">
+                    <Command.Empty className="px-4 py-14 text-center text-[13px] text-(--cmdk-text-muted) sm:text-sm">
                       No results found.
                     </Command.Empty>
 
@@ -291,10 +307,10 @@ export const SearchModalDialog = ({
                                 <FileSearch aria-hidden className="size-4" />
                               </span>
                               <div className="min-w-0 flex-1">
-                                <p className="truncate text-sm font-medium text-(--cmdk-text)">
+                                <p className="truncate text-[13px] font-medium text-(--cmdk-text) sm:text-sm">
                                   {highlightMatch(item.filename, query)}
                                 </p>
-                                <p className="mt-1 truncate text-xs text-(--cmdk-text-muted)">
+                                <p className="mt-1 truncate text-[11px] text-(--cmdk-text-muted) sm:text-xs">
                                   {item.keywords.join(' · ')}
                                 </p>
                               </div>
@@ -309,12 +325,12 @@ export const SearchModalDialog = ({
                         />
 
                         <Command.Item
-                          className="mx-2 flex cursor-pointer items-center justify-between rounded-2xl border border-(--cmdk-item-hover-border) bg-(--cmdk-icon-bg) px-4 py-3 text-sm font-medium text-(--cmdk-text) outline-none transition-colors data-[selected=true]:bg-(--cmdk-item-hover-bg)"
+                          className="mx-2 flex cursor-pointer items-center justify-between rounded-2xl border border-(--cmdk-item-hover-border) bg-(--cmdk-icon-bg) px-4 py-3 text-[13px] font-medium text-(--cmdk-text) outline-none transition-colors data-[selected=true]:bg-(--cmdk-item-hover-bg) sm:text-sm"
                           onSelect={handleClose}
                           value="show-results"
                         >
                           <span>Show {filteredResults.length} results</span>
-                          <span className="text-xs uppercase tracking-[0.18em] text-(--cmdk-text-muted)">
+                          <span className="text-[11px] uppercase tracking-[0.18em] text-(--cmdk-text-muted) sm:text-xs">
                             Enter
                           </span>
                         </Command.Item>
@@ -324,7 +340,7 @@ export const SearchModalDialog = ({
                 )}
               </Command.List>
 
-              <section className="flex flex-wrap items-center gap-3 border-t border-(--cmdk-divider) bg-(--cmdk-footer-bg) px-4 py-3 sm:px-6">
+              <section className="hidden flex-wrap items-center gap-3 border-t border-(--cmdk-divider) bg-(--cmdk-footer-bg) px-4 py-3 sm:flex sm:px-6">
                 {KEYBOARD_SHORTCUTS.map((shortcut) => (
                   <div
                     className="flex items-center gap-2 text-xs text-(--cmdk-text-muted)"

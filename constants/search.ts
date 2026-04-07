@@ -30,19 +30,19 @@ export const SEARCH_CATEGORIES: SearchCategoryDefinition[] = [
   },
   {
     color:
-      'border-sky-500/25 bg-sky-500/12 text-sky-700 dark:border-sky-300/30 dark:bg-sky-300/14 dark:text-sky-100',
+      'border-blue-600/25 bg-blue-600/12 text-blue-700 dark:border-blue-300/30 dark:bg-blue-300/14 dark:text-blue-100',
     icon: Users2,
     key: 'Teams',
   },
   {
     color:
-      'border-emerald-500/25 bg-emerald-500/12 text-emerald-700 dark:border-emerald-300/30 dark:bg-emerald-300/14 dark:text-emerald-100',
+      'border-green-600/25 bg-green-600/12 text-green-700 dark:border-green-300/30 dark:bg-green-300/14 dark:text-green-100',
     icon: FileText,
     key: 'Documents',
   },
   {
     color:
-      'border-rose-500/25 bg-rose-500/12 text-rose-700 dark:border-rose-300/30 dark:bg-rose-300/14 dark:text-rose-100',
+      'border-red-600/25 bg-red-600/12 text-red-700 dark:border-red-300/30 dark:bg-red-300/14 dark:text-red-100',
     icon: ListTodo,
     key: 'Tasks',
   },

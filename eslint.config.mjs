@@ -18,17 +18,14 @@ export default antfu(
       semi: true,
     },
 
-    // Format settings
-    formatters: {
-      css: true,
-    },
-
     // Ignored paths
     ignores: [
       'src/migrations/**/*',
       'src/payload-types.ts',
       'src/app/(payload)/admin/importMap.js',
       'src/**/*.scss',
+      '.agents/**/*',
+      '.agent/**/*',
     ],
   },
   // --- Accessibility Rules ---

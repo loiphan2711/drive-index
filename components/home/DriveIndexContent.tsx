@@ -1,113 +1,8 @@
 'use client';
 
-import type { LucideIcon } from 'lucide-react';
-import {
-  File,
-  FileText,
-  FileType,
-  FolderOpen,
-  Image,
-  Sheet,
-} from 'lucide-react';
-
+import type { DriveItem, FileCategory } from '@/type/file';
+import { FILE_CATEGORY_STYLES } from '@/constants/file-type';
 import { useViewMode } from '@/context/useViewMode';
-
-type DriveItem = {
-  extension?: string;
-  id: string;
-  location: string;
-  modifiedAt: string;
-  name: string;
-  size: string;
-  thumbnailUrl?: string;
-  type: 'File' | 'Folder';
-};
-
-type FileCategory =
-  | 'document'
-  | 'folder'
-  | 'generic'
-  | 'image'
-  | 'pdf'
-  | 'spreadsheet';
-
-type FileCategoryStyle = {
-  accent: string;
-  bgSubtle: string;
-  color: string;
-  icon: LucideIcon;
-  label: string;
-  overlayColor: string;
-};
-
-const FILE_CATEGORY_STYLES: Record<FileCategory, FileCategoryStyle> = {
-  document: {
-    accent: 'border-t-sky-500/55 dark:border-t-sky-300/45',
-    bgSubtle:
-      'bg-gradient-to-br from-sky-500/18 via-sky-500/6 to-background dark:from-sky-300/18 dark:via-sky-300/7 dark:to-background',
-    color:
-      'border-sky-500/25 bg-sky-500/12 text-sky-700 dark:border-sky-300/30 dark:bg-sky-300/14 dark:text-sky-100',
-    icon: FileText,
-    label: 'Document',
-    overlayColor:
-      'border-sky-500/25 text-sky-700 dark:border-sky-300/30 dark:text-sky-100',
-  },
-  folder: {
-    accent: 'border-t-amber-500/55 dark:border-t-amber-300/45',
-    bgSubtle:
-      'bg-gradient-to-br from-amber-500/18 via-amber-500/6 to-background dark:from-amber-300/18 dark:via-amber-300/7 dark:to-background',
-    color:
-      'border-amber-500/25 bg-amber-500/12 text-amber-700 dark:border-amber-300/30 dark:bg-amber-300/14 dark:text-amber-100',
-    icon: FolderOpen,
-    label: 'Folder',
-    overlayColor:
-      'border-amber-500/25 text-amber-700 dark:border-amber-300/30 dark:text-amber-100',
-  },
-  generic: {
-    accent: 'border-t-zinc-500/40 dark:border-t-zinc-300/35',
-    bgSubtle:
-      'bg-gradient-to-br from-zinc-500/16 via-zinc-500/6 to-background dark:from-zinc-300/16 dark:via-zinc-300/7 dark:to-background',
-    color:
-      'border-zinc-500/20 bg-zinc-500/10 text-zinc-700 dark:border-zinc-300/25 dark:bg-zinc-300/12 dark:text-zinc-100',
-    icon: File,
-    label: 'File',
-    overlayColor:
-      'border-zinc-500/20 text-zinc-700 dark:border-zinc-300/25 dark:text-zinc-100',
-  },
-  image: {
-    accent: 'border-t-violet-500/55 dark:border-t-violet-300/45',
-    bgSubtle:
-      'bg-gradient-to-br from-violet-500/20 via-violet-500/7 to-background dark:from-violet-300/18 dark:via-violet-300/8 dark:to-background',
-    color:
-      'border-violet-500/25 bg-violet-500/12 text-violet-700 dark:border-violet-300/30 dark:bg-violet-300/14 dark:text-violet-100',
-    icon: Image,
-    label: 'Image',
-    overlayColor:
-      'border-violet-500/25 text-violet-700 dark:border-violet-300/30 dark:text-violet-100',
-  },
-  pdf: {
-    accent: 'border-t-rose-500/55 dark:border-t-rose-300/45',
-    bgSubtle:
-      'bg-gradient-to-br from-rose-500/18 via-rose-500/6 to-background dark:from-rose-300/18 dark:via-rose-300/7 dark:to-background',
-    color:
-      'border-rose-500/25 bg-rose-500/12 text-rose-700 dark:border-rose-300/30 dark:bg-rose-300/14 dark:text-rose-100',
-    icon: FileType,
-    label: 'PDF',
-    overlayColor:
-      'border-rose-500/25 text-rose-700 dark:border-rose-300/30 dark:text-rose-100',
-  },
-  spreadsheet: {
-    accent: 'border-t-emerald-500/55 dark:border-t-emerald-300/45',
-    bgSubtle:
-      'bg-gradient-to-br from-emerald-500/18 via-emerald-500/6 to-background dark:from-emerald-300/18 dark:via-emerald-300/7 dark:to-background',
-    color:
-      'border-emerald-500/25 bg-emerald-500/12 text-emerald-700 dark:border-emerald-300/30 dark:bg-emerald-300/14 dark:text-emerald-100',
-    icon: Sheet,
-    label: 'Spreadsheet',
-    overlayColor:
-      'border-emerald-500/25 text-emerald-700 dark:border-emerald-300/30 dark:text-emerald-100',
-  },
-};
 
 const FILE_CATEGORY_BY_EXTENSION: Partial<Record<string, FileCategory>> = {
   csv: 'spreadsheet',
@@ -219,9 +114,11 @@ function getFileCategoryStyle(item: DriveItem) {
 }
 
 function DriveItemBadge({
+  iconOnly,
   item,
   variant = 'default',
 }: {
+  iconOnly?: boolean;
   item: DriveItem;
   variant?: 'default' | 'overlay';
 }) {
@@ -229,98 +126,87 @@ function DriveItemBadge({
   const Icon = style.icon;
   const badgeClassName =
     variant === 'overlay'
-      ? `border ${style.overlayColor} bg-white/80 shadow-sm backdrop-blur-md dark:bg-black/60`
+      ? `border ${style.overlayColor} bg-white/90 shadow-sm dark:bg-[#1c202b]/90`
       : style.color;
 
   return (
     <span
-      className={`inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 text-[10px] font-semibold uppercase tracking-[0.22em] ${badgeClassName}`}
+      className={`inline-flex items-center justify-center rounded-full text-[10px] font-semibold uppercase tracking-[0.22em] ${iconOnly ? 'px-1.5 py-1' : 'gap-1.5 px-2.5 py-1'} ${badgeClassName}`}
     >
       <Icon aria-hidden className="size-3" />
-      {style.label}
+      {iconOnly ? <span className="sr-only">{style.label}</span> : style.label}
     </span>
   );
 }
 
-function DriveItemPreview({ item }: { item: DriveItem }) {
+function DriveItemPreviewSlot({ item }: { item: DriveItem }) {
   const style = getFileCategoryStyle(item);
   const Icon = style.icon;
 
-  return (
-    <div
-      className={`relative aspect-[4/3] overflow-hidden rounded-t-2xl border-b border-foreground/8 ${style.bgSubtle}`}
-    >
-      <div className="absolute left-2 top-2 z-10">
-        <DriveItemBadge item={item} variant="overlay" />
+  if (item.thumbnailUrl) {
+    return (
+      <div className="relative h-28 w-full overflow-hidden rounded-lg border border-foreground/10 bg-foreground/3 shadow-[inset_0_1px_0_rgba(255,255,255,0.22)] dark:shadow-[inset_0_1px_0_rgba(255,255,255,0.04)]">
+        {/* The compact preview uses a plain img for lightweight mock-data thumbnails. */}
+        {/* eslint-disable-next-line next/no-img-element */}
+        <img
+          alt={`Preview of ${item.name}`}
+          className="h-full w-full object-cover transition-transform duration-200 group-hover:scale-[1.05]"
+          loading="lazy"
+          src={item.thumbnailUrl}
+        />
+        <div className="absolute inset-0 bg-linear-to-t from-black/20 via-transparent to-white/10 dark:from-black/35 dark:to-white/5" />
+        <div
+          className={`absolute bottom-1.5 right-1.5 flex size-5 items-center justify-center rounded-md border bg-background/85 shadow-sm backdrop-blur ${style.overlayColor}`}
+        >
+          <Icon aria-hidden className="size-3" />
+        </div>
       </div>
+    );
+  }
 
-      {item.thumbnailUrl ? (
-        <>
-          {/* The preview intentionally uses a plain img for lightweight mock-data thumbnails. */}
-          {/* eslint-disable-next-line next/no-img-element */}
-          <img
-            alt={`Preview of ${item.name}`}
-            className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-[1.03]"
-            loading="lazy"
-            src={item.thumbnailUrl}
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/25 via-black/5 to-white/10 dark:from-black/40 dark:via-black/10 dark:to-white/5" />
-        </>
-      ) : (
-        <>
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(255,255,255,0.22),transparent_45%)] dark:bg-[radial-gradient(circle_at_top_left,rgba(255,255,255,0.08),transparent_45%)]" />
-          <div className="relative flex h-full flex-col justify-between p-4">
-            <div />
-            <div className="flex items-end justify-between gap-4">
-              <div
-                className={`flex size-14 items-center justify-center rounded-[1.2rem] border shadow-[0_18px_30px_-22px_rgba(15,23,42,0.9)] ${style.color}`}
-              >
-                <Icon aria-hidden className="size-7" />
-              </div>
-              {item.extension ? (
-                <span className="rounded-full border border-foreground/10 bg-background/72 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.22em] text-foreground/55 backdrop-blur">
-                  {item.extension}
-                </span>
-              ) : null}
-            </div>
-          </div>
-        </>
-      )}
+  return (
+    <div className="relative flex h-28 w-full items-center justify-center overflow-hidden rounded-lg border border-foreground/10 bg-[radial-gradient(circle_at_top_left,rgba(255,255,255,0.22),transparent_45%)] dark:bg-[radial-gradient(circle_at_top_left,rgba(255,255,255,0.08),transparent_45%)]">
+      <div
+        className={`flex size-8 items-center justify-center rounded-md border shadow-[0_10px_24px_-18px_rgba(28,32,43,0.75)] ${style.color}`}
+      >
+        <Icon aria-hidden className="size-4" />
+      </div>
     </div>
   );
 }
 
 function DriveGrid({ items }: { items: DriveItem[] }) {
   return (
-    <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+    <div className="grid grid-cols-1 gap-3 min-[425px]:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6">
       {items.map((item) => {
         const style = getFileCategoryStyle(item);
 
         return (
           <article
             key={item.id}
-            className={`group isolate overflow-hidden rounded-2xl border border-foreground/10 border-t-4 bg-background/80 shadow-[0_18px_50px_-28px_rgba(15,23,42,0.4)] backdrop-blur-xl transition-all duration-200 will-change-transform hover:-translate-y-0.5 hover:border-b-foreground/20 hover:border-l-foreground/20 hover:border-r-foreground/20 hover:shadow-[0_24px_70px_-30px_rgba(15,23,42,0.46)] ${style.accent}`}
+            className={`group isolate flex h-full flex-col overflow-hidden rounded-xl border border-foreground/10 border-t-4 bg-background/95 shadow-[0_4px_20px_-4px_rgba(28,32,43,0.25)] transition-all duration-150 will-change-transform hover:-translate-y-0.5 hover:border-b-foreground/20 hover:border-l-foreground/20 hover:border-r-foreground/20 hover:shadow-[0_12px_32px_-12px_rgba(28,32,43,0.28)] ${style.accent}`}
           >
-            <DriveItemPreview item={item} />
+            <div className="px-3 pt-3">
+              <DriveItemPreviewSlot item={item} />
+            </div>
 
-            <div className="p-3">
-              <p className="truncate text-sm font-semibold tracking-tight text-foreground">
+            <div className="px-3 pb-3 pt-2">
+              <p className="truncate text-xs font-semibold tracking-tight text-foreground">
                 {item.name}
               </p>
-              <p className="mt-1 truncate text-xs text-foreground/55">
+              <p className="mt-0.5 truncate text-[11px] text-foreground/50">
                 {item.location}
               </p>
+            </div>
 
-              <div className="my-3 h-px bg-foreground/8" />
+            <div className="mx-3 h-px bg-foreground/8" />
 
-              <div className="flex items-center justify-between gap-3">
-                <p className="text-xs text-foreground/55">
-                  {item.modifiedAt}
-                  <span className="mx-1.5 text-foreground/30">·</span>
-                  {item.size}
-                </p>
-                <DriveItemBadge item={item} />
-              </div>
+            <div className="flex items-center justify-between gap-2 px-3 py-2">
+              <p className="truncate text-[11px] text-foreground/50">
+                {item.modifiedAt}
+                <span className="mx-1 text-foreground/30">·</span>
+                {item.size}
+              </p>
             </div>
           </article>
         );
@@ -331,9 +217,9 @@ function DriveGrid({ items }: { items: DriveItem[] }) {
 
 function DriveTable({ items }: { items: DriveItem[] }) {
   return (
-    <div className="overflow-hidden rounded-3xl border border-foreground/10 bg-background/88 shadow-[0_18px_50px_-28px_rgba(15,23,42,0.35)] backdrop-blur-xl">
+    <div className="overflow-hidden rounded-xl border border-foreground/10 bg-background/95 shadow-[0_18px_50px_-28px_rgba(28,32,43,0.35)]">
       <table className="w-full border-collapse text-left">
-        <thead className="bg-foreground/[0.03] text-[11px] uppercase tracking-[0.22em] text-foreground/45">
+        <thead className="bg-foreground/3 text-[11px] uppercase tracking-[0.22em] text-foreground/45">
           <tr>
             <th className="px-4 py-3 font-semibold sm:px-6">Name</th>
             <th className="hidden px-4 py-3 font-semibold md:table-cell">
@@ -351,7 +237,7 @@ function DriveTable({ items }: { items: DriveItem[] }) {
             return (
               <tr
                 key={item.id}
-                className="border-t border-foreground/8 text-sm text-foreground/75 transition-colors duration-200 hover:bg-foreground/[0.03]"
+                className="border-t border-foreground/8 text-sm text-foreground/75 transition-colors duration-200 hover:bg-foreground/3"
               >
                 <td className="px-4 py-4 sm:px-6">
                   <div className="flex items-center gap-3">
