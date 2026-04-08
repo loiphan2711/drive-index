@@ -5,6 +5,7 @@ import { Search } from 'lucide-react';
 import { usePathname } from 'next/navigation';
 
 import { SearchModal } from '@/components/SearchModal';
+import { Button } from '@/components/ui/Button';
 
 const HEADERLESS_PATHS = ['/login', '/auth/callback'];
 
@@ -29,11 +30,13 @@ export const Header = () => {
           </div>
 
           <SearchModal
-            trigger={(open) => (
-              <button
+            trigger={(open, onOpen) => (
+              <Button
+                appearance="outline"
                 aria-expanded={open}
                 aria-haspopup="dialog"
-                className="flex items-center justify-center rounded-lg border border-foreground/10 bg-background/70 p-2.75 text-foreground/65 shadow-sm transition-colors hover:bg-foreground/4 sm:min-w-0 sm:flex-1 sm:justify-between sm:px-3 sm:py-2 sm:max-w-sm"
+                className="sm:min-w-0 sm:max-w-sm sm:flex-1 sm:justify-between sm:px-3 sm:py-2"
+                onPress={onOpen}
                 type="button"
               >
                 <span className="flex min-w-0 items-center gap-2">
@@ -53,7 +56,7 @@ export const Header = () => {
                     <Kbd.Content>K</Kbd.Content>
                   </Kbd>
                 </span>
-              </button>
+              </Button>
             )}
           />
         </div>

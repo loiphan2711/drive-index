@@ -1,6 +1,6 @@
 'use client';
 
-import type { ComponentPropsWithoutRef, ReactNode } from 'react';
+import type { ComponentPropsWithoutRef } from 'react';
 import type { SearchCategory } from '@/type/search-dialog';
 
 import * as Dialog from '@radix-ui/react-dialog';
@@ -21,6 +21,7 @@ import {
   useState,
 } from 'react';
 
+import { Button } from '@/components/ui/Button';
 import {
   KEYBOARD_SHORTCUTS,
   MOCK_SEARCH_RESULTS,
@@ -40,13 +41,11 @@ const SEARCH_TERM_SPLIT_PATTERN = /\s+/;
 type SearchModalDialogProps = {
   onOpenChange: (open: boolean) => void;
   open: boolean;
-  trigger?: (open: boolean) => ReactNode;
 };
 
 export const SearchModalDialog = ({
   onOpenChange,
   open,
-  trigger,
 }: SearchModalDialogProps) => {
   const inputRef = useRef<HTMLInputElement>(null);
   const [query, setQuery] = useState('');
@@ -138,9 +137,6 @@ export const SearchModalDialog = ({
 
   return (
     <Dialog.Root onOpenChange={handleOpenChange} open={open}>
-      {trigger ? (
-        <Dialog.Trigger asChild>{trigger(open)}</Dialog.Trigger>
-      ) : null}
       <Dialog.Portal>
         <Dialog.Overlay {...overlayProps} />
         <div className="cmdk-dialog-shell">
@@ -189,14 +185,15 @@ export const SearchModalDialog = ({
                       <ShortcutKey>K</ShortcutKey>
                     </div>
                   </div>
-                  <button
+                  <Button
+                    appearance="icon"
                     aria-label="Close search dialog"
-                    className="flex size-8 shrink-0 items-center justify-center rounded-full border border-(--cmdk-kbd-border) bg-(--cmdk-kbd-bg) text-(--cmdk-text-muted) transition-colors hover:text-(--cmdk-text) sm:size-9"
-                    onClick={handleClose}
+                    isIconOnly
+                    onPress={handleClose}
                     type="button"
                   >
                     <X aria-hidden className="size-4" />
-                  </button>
+                  </Button>
                 </div>
 
                 {!hasQuery ? (

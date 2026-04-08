@@ -2,7 +2,7 @@
 
 import type { FormEvent, ReactNode } from 'react';
 
-import { Button, Card } from '@heroui/react';
+import { Card, cn } from '@heroui/react';
 import {
   ArrowLeft,
   ArrowRight,
@@ -13,6 +13,8 @@ import {
 } from 'lucide-react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { Suspense, useEffect, useMemo, useRef, useState } from 'react';
+
+import { Button } from '@/components/ui/Button';
 
 import { OtpInput } from './OtpInput';
 
@@ -25,11 +27,6 @@ type AuthApiResponse = {
 type StatusTone = 'notice' | 'error';
 
 const OTP_LENGTH = 8;
-
-const PRIMARY_BUTTON_CLASS_NAME =
-  'group relative inline-flex h-12 w-full items-center justify-center gap-2 overflow-hidden rounded-[1.15rem] bg-[linear-gradient(135deg,var(--primary)_0%,var(--secondary)_100%)] px-4 text-[12px] font-semibold uppercase tracking-[0.22em] text-white shadow-[0_24px_40px_-24px_rgb(var(--primary-rgb)/0.9)] transition-all duration-200 hover:-translate-y-0.5 hover:shadow-[0_28px_50px_-24px_rgb(var(--primary-rgb)/0.95)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:translate-y-0 disabled:cursor-not-allowed disabled:opacity-70';
-const SECONDARY_BUTTON_CLASS_NAME =
-  'inline-flex h-11 w-full items-center justify-center gap-2 rounded-[1.05rem] border border-foreground/20 bg-white/85 px-4 text-[11px] font-semibold uppercase tracking-[0.18em] text-foreground/70 transition-all duration-200 hover:border-foreground/30 hover:bg-white hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:cursor-not-allowed disabled:opacity-60 dark:border-foreground/12 dark:bg-background/72 dark:hover:border-foreground/22 dark:hover:bg-foreground/4';
 
 const getSafeNextPath = (candidate: string | null) => {
   if (!candidate || !candidate.startsWith('/') || candidate.startsWith('//')) {
@@ -57,8 +54,17 @@ const CardShell = ({
   subtitle: ReactNode;
   children: ReactNode;
 }) => (
-  <Card className="auth-panel relative overflow-hidden border border-foreground/18 bg-[linear-gradient(180deg,rgb(var(--white-rgb)/0.97),rgb(var(--white-rgb)/0.88))] shadow-[0_4px_24px_-2px_rgb(var(--ink-rgb)/0.10),0_48px_80px_-40px_rgb(var(--ink-rgb)/0.18)] backdrop-blur-xl dark:border-foreground/12 dark:bg-[linear-gradient(180deg,rgb(var(--ink-rgb)/0.96),rgb(var(--ink-rgb)/0.88))] dark:shadow-[0_48px_120px_-52px_rgb(var(--ink-rgb)/0.6)]">
-    <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-primary to-transparent" />
+  <Card
+    className={cn(
+      'auth-panel relative overflow-hidden border border-foreground/18',
+      'bg-[linear-gradient(180deg,rgb(var(--white-rgb)/0.97),rgb(var(--white-rgb)/0.88))]',
+      'shadow-[0_4px_24px_-2px_rgb(var(--ink-rgb)/0.10),0_48px_80px_-40px_rgb(var(--ink-rgb)/0.18)]',
+      'backdrop-blur-xl dark:border-foreground/12',
+      'dark:bg-[linear-gradient(180deg,rgb(var(--ink-rgb)/0.96),rgb(var(--ink-rgb)/0.88))]',
+      'dark:shadow-[0_48px_120px_-52px_rgb(var(--ink-rgb)/0.6)]',
+    )}
+  >
+    <div className="absolute inset-x-0 top-0 h-px bg-linear-to-r from-transparent via-primary to-transparent" />
     <div
       aria-hidden
       className="pointer-events-none absolute -left-8 top-12 h-24 w-24 rounded-full bg-primary/12 blur-3xl"
@@ -106,12 +112,12 @@ const StatusBanner = ({
 
   return (
     <div
-      className={[
+      className={cn(
         'auth-banner flex items-start gap-3 rounded-[1.25rem] border px-4 py-3 text-[12.5px] leading-relaxed shadow-[0_16px_40px_-30px_rgb(var(--ink-rgb)/0.35)]',
         isError
           ? 'border-red-500/45 bg-red-500/14 text-red-700 dark:border-red-500/28 dark:bg-red-500/8 dark:text-red-300'
           : 'border-secondary/40 bg-secondary/12 text-foreground/80 dark:border-secondary/24 dark:bg-secondary/8 dark:text-foreground/72',
-      ].join(' ')}
+      )}
       role={isError ? 'alert' : 'status'}
       aria-live={isError ? 'assertive' : 'polite'}
     >
@@ -245,7 +251,16 @@ const LoginPageContent = () => {
             Work email
           </label>
 
-          <div className="group flex items-center gap-2.5 rounded-xl border border-foreground/20 bg-white/95 px-3.5 py-2.5 shadow-[inset_0_1px_2px_rgb(var(--ink-rgb)/0.06)] transition-all duration-200 hover:border-foreground/30 focus-within:border-primary/55 focus-within:bg-white focus-within:shadow-[0_0_0_4px_rgb(var(--primary-rgb)/0.12),inset_0_1px_2px_rgb(var(--ink-rgb)/0.04)] dark:border-foreground/12 dark:bg-background/80 dark:shadow-none dark:hover:border-foreground/22 dark:focus-within:border-primary/45 dark:focus-within:bg-background dark:focus-within:shadow-[0_0_0_4px_rgb(var(--primary-rgb)/0.12)]">
+          <div
+            className={cn(
+              'group flex items-center gap-2.5 rounded-xl border px-3.5 py-2.5 transition-all duration-200',
+              'border-foreground/20 bg-white/95 shadow-[inset_0_1px_2px_rgb(var(--ink-rgb)/0.06)]',
+              'hover:border-foreground/30',
+              'focus-within:border-primary/55 focus-within:bg-white focus-within:shadow-[0_0_0_4px_rgb(var(--primary-rgb)/0.12),inset_0_1px_2px_rgb(var(--ink-rgb)/0.04)]',
+              'dark:border-foreground/12 dark:bg-background/80 dark:shadow-none',
+              'dark:hover:border-foreground/22 dark:focus-within:border-primary/45 dark:focus-within:bg-background dark:focus-within:shadow-[0_0_0_4px_rgb(var(--primary-rgb)/0.12)]',
+            )}
+          >
             <Mail
               className="size-4 shrink-0 text-foreground/45 transition-colors duration-200 group-focus-within:text-primary"
               aria-hidden
@@ -272,7 +287,8 @@ const LoginPageContent = () => {
 
           <Button
             type="submit"
-            className={PRIMARY_BUTTON_CLASS_NAME}
+            appearance="primary"
+            fullWidth
             isDisabled={isSubmitting}
           >
             {isSubmitting ? (
@@ -307,10 +323,11 @@ const LoginPageContent = () => {
           {notice && <StatusBanner tone="notice">{notice}</StatusBanner>}
           {error && <StatusBanner tone="error">{error}</StatusBanner>}
 
-          <button
+          <Button
             type="submit"
-            className={PRIMARY_BUTTON_CLASS_NAME}
-            disabled={isSubmitting || otp.length < OTP_LENGTH}
+            appearance="primary"
+            fullWidth
+            isDisabled={isSubmitting || otp.length < OTP_LENGTH}
           >
             {isSubmitting ? (
               <span className="inline-flex items-center gap-2">
@@ -326,19 +343,20 @@ const LoginPageContent = () => {
                 />
               </>
             )}
-          </button>
+          </Button>
 
-          <button
+          <Button
             type="button"
-            onClick={goBackToEmailStep}
-            className={SECONDARY_BUTTON_CLASS_NAME}
-            disabled={isSubmitting}
+            onPress={goBackToEmailStep}
+            appearance="secondary"
+            fullWidth
+            isDisabled={isSubmitting}
           >
             <span className="inline-flex items-center gap-2">
               <ArrowLeft className="size-4" />
               Use a different email
             </span>
-          </button>
+          </Button>
         </form>
       )}
     </CardShell>
@@ -346,7 +364,16 @@ const LoginPageContent = () => {
 };
 
 const LoginPageFallback = () => (
-  <Card className="auth-panel relative overflow-hidden border border-foreground/18 bg-[linear-gradient(180deg,rgb(var(--white-rgb)/0.97),rgb(var(--white-rgb)/0.88))] shadow-[0_4px_24px_-2px_rgb(var(--ink-rgb)/0.10),0_48px_80px_-40px_rgb(var(--ink-rgb)/0.18)] backdrop-blur-xl dark:border-foreground/12 dark:bg-[linear-gradient(180deg,rgb(var(--ink-rgb)/0.96),rgb(var(--ink-rgb)/0.88))] dark:shadow-[0_48px_120px_-52px_rgb(var(--ink-rgb)/0.6)]">
+  <Card
+    className={cn(
+      'auth-panel relative overflow-hidden border border-foreground/18',
+      'bg-[linear-gradient(180deg,rgb(var(--white-rgb)/0.97),rgb(var(--white-rgb)/0.88))]',
+      'shadow-[0_4px_24px_-2px_rgb(var(--ink-rgb)/0.10),0_48px_80px_-40px_rgb(var(--ink-rgb)/0.18)]',
+      'backdrop-blur-xl dark:border-foreground/12',
+      'dark:bg-[linear-gradient(180deg,rgb(var(--ink-rgb)/0.96),rgb(var(--ink-rgb)/0.88))]',
+      'dark:shadow-[0_48px_120px_-52px_rgb(var(--ink-rgb)/0.6)]',
+    )}
+  >
     <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-primary to-transparent" />
 
     <Card.Header className="pb-3 pt-5">

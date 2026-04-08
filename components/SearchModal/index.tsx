@@ -1,15 +1,28 @@
 import type { ReactNode } from 'react';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 import { SearchModalDialog } from '@/components/SearchModal/SearchModalDialog';
 
 type SearchModalProps = {
-  trigger?: (open: boolean) => ReactNode;
+  trigger?: (open: boolean, onOpen: () => void) => ReactNode;
+};
+
+const getActiveElement = () => {
+  if (typeof document === 'undefined') {
+    return null;
+  }
+
+  const activeElement = document.activeElement;
+  return activeElement instanceof HTMLElement ? activeElement : null;
 };
 
 export const SearchModal = ({ trigger }: SearchModalProps) => {
   const [searchOpen, setSearchOpen] = useState(false);
+  const lastActiveElementRef = useRef<HTMLElement | null>(null);
+  const wasOpenRef = useRef(false);
+
   const openSearch = () => {
+    lastActiveElementRef.current = getActiveElement();
     setSearchOpen(true);
   };
 
@@ -28,11 +41,18 @@ export const SearchModal = ({ trigger }: SearchModalProps) => {
     };
   }, []);
 
+  useEffect(() => {
+    if (!searchOpen && wasOpenRef.current) {
+      lastActiveElementRef.current?.focus();
+    }
+
+    wasOpenRef.current = searchOpen;
+  }, [searchOpen]);
+
   return (
-    <SearchModalDialog
-      onOpenChange={setSearchOpen}
-      open={searchOpen}
-      trigger={trigger}
-    />
+    <>
+      {trigger ? trigger(searchOpen, openSearch) : null}
+      <SearchModalDialog onOpenChange={setSearchOpen} open={searchOpen} />
+    </>
   );
 };
