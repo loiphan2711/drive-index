@@ -16,7 +16,7 @@ import { Suspense, useEffect, useMemo, useRef, useState } from 'react';
 
 import { Button } from '@/components/ui/Button';
 
-import { OtpInput } from './OtpInput';
+import { OtpInput } from '@/components/ui/OtpInput';
 
 type AuthStep = 'email' | 'otp';
 
@@ -374,7 +374,7 @@ const LoginPageFallback = () => (
       'dark:shadow-[0_48px_120px_-52px_rgb(var(--ink-rgb)/0.6)]',
     )}
   >
-    <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-primary to-transparent" />
+    <div className="absolute inset-x-0 top-0 h-px bg-linear-to-r from-transparent via-primary to-transparent" />
 
     <Card.Header className="pb-3 pt-5">
       <div className="flex items-center gap-3">
