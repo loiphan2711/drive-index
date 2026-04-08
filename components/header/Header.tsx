@@ -1,37 +1,19 @@
 'use client';
 
-import { Button, Kbd } from '@heroui/react';
-import { LogOut, Search } from 'lucide-react';
-import { usePathname, useRouter } from 'next/navigation';
-import { useTransition } from 'react';
+import { Kbd } from '@heroui/react';
+import { Search } from 'lucide-react';
+import { usePathname } from 'next/navigation';
 
 import { SearchModal } from '@/components/SearchModal';
-import { createClient } from '@/lib/supabase/client';
-
-import { ThemeDropdown } from './ThemeDropdown';
-import { ViewModeDropdown } from './ViewModeDropdown';
 
 const HEADERLESS_PATHS = ['/login', '/auth/callback'];
 
 export const Header = () => {
   const pathname = usePathname();
-  const router = useRouter();
-  const [isSigningOut, startTransition] = useTransition();
 
   if (HEADERLESS_PATHS.some((path) => pathname.startsWith(path))) {
     return null;
   }
-
-  const handleLogout = () => {
-    startTransition(() => {
-      void (async () => {
-        const supabase = createClient();
-        await supabase.auth.signOut();
-        router.replace('/login');
-        router.refresh();
-      })();
-    });
-  };
 
   return (
     <>
@@ -74,26 +56,6 @@ export const Header = () => {
               </button>
             )}
           />
-
-          <ViewModeDropdown />
-
-          <ThemeDropdown />
-
-          <Button
-            aria-label="Sign out"
-            className="rounded-lg border border-foreground/10 bg-background/70 px-3 text-sm text-foreground/75 transition-colors hover:bg-foreground/4 hover:text-foreground"
-            onPress={handleLogout}
-            isDisabled={isSigningOut}
-            size="sm"
-            variant="ghost"
-          >
-            <span className="inline-flex items-center gap-2">
-              <LogOut aria-hidden className="size-4" />
-              <span className="hidden sm:inline">
-                {isSigningOut ? 'Signing out...' : 'Logout'}
-              </span>
-            </span>
-          </Button>
         </div>
       </header>
     </>

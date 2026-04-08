@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { Bangers, JetBrains_Mono } from 'next/font/google';
 
+import { FloatingMenu } from '@/components/FloatingMenu';
 import { Header } from '@/components/header';
 import { ThemeProvider } from '@/context/ThemeContext';
 import { ViewModeProvider } from '@/context/ViewModeContext';
@@ -40,6 +41,7 @@ export default function RootLayout({
         <ThemeProvider>
           <ViewModeProvider>
             <Header />
+            <FloatingMenu />
             <div className="flex flex-1 flex-col">{children}</div>
           </ViewModeProvider>
         </ThemeProvider>
