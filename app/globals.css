@@ -344,22 +344,6 @@ body {
   }
 }
 
-.auth-login-grid {
-  background-image:
-    linear-gradient(rgb(var(--primary-rgb) / 0.1) 2px, transparent 2px),
-    linear-gradient(90deg, rgb(var(--primary-rgb) / 0.1) 2px, transparent 2px),
-    linear-gradient(rgb(var(--primary-rgb) / 0.04) 1px, transparent 1px),
-    linear-gradient(90deg, rgb(var(--primary-rgb) / 0.04) 1px, transparent 1px);
-  background-size: 42px 42px, 42px 42px, 14px 14px, 14px 14px;
-  animation: auth-grid-shift 18s linear infinite alternate;
-  mask-image: radial-gradient(circle at center, black 42%, transparent 88%);
-  -webkit-mask-image: radial-gradient(
-    circle at center,
-    black 42%,
-    transparent 88%
-  );
-}
-
 .auth-panel {
   animation: auth-panel-in 560ms cubic-bezier(0.16, 1, 0.3, 1) both;
 }
@@ -384,17 +368,7 @@ body {
   animation: auth-digit-pop 220ms cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
-.dark .auth-login-grid {
-  background-image:
-    linear-gradient(rgb(var(--primary-rgb) / 0.15) 2px, transparent 2px),
-    linear-gradient(90deg, rgb(var(--primary-rgb) / 0.15) 2px, transparent 2px),
-    linear-gradient(rgb(var(--primary-rgb) / 0.06) 1px, transparent 1px),
-    linear-gradient(90deg, rgb(var(--primary-rgb) / 0.06) 1px, transparent 1px);
-  background-size: 42px 42px, 42px 42px, 14px 14px, 14px 14px;
-}
-
 @media (prefers-reduced-motion: reduce) {
-  .auth-login-grid,
   .auth-panel,
   .auth-stage,
   .auth-banner,

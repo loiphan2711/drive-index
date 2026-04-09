@@ -1,4 +1,4 @@
-import { DriveIndexContent } from '@/components/home/DriveIndexContent';
+import { DriveIndexContent } from '@/components/ui/home/DriveIndexContent';
 
 const Home = () => {
   return <DriveIndexContent />;

@@ -6,8 +6,7 @@ import { usePathname } from 'next/navigation';
 
 import { Button } from '@/components/common/Button';
 import { SearchModal } from '@/components/SearchModal';
-
-const HEADERLESS_PATHS = ['/login', '/auth/callback'];
+import { HEADERLESS_PATHS } from '@/constants/path';
 
 export const Header = () => {
   const pathname = usePathname();

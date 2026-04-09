@@ -6,6 +6,7 @@ import { FloatingMenu } from '@/components/FloatingMenu';
 import { Header } from '@/components/header';
 import { ThemeProvider } from '@/context/ThemeContext';
 import { ViewModeProvider } from '@/context/ViewModeContext';
+import { SWRProvider } from '@/lib/swr/provider';
 
 import './globals.css';
 
@@ -42,15 +43,17 @@ export default function RootLayout({
     >
       <body className="min-h-full bg-background font-sans text-foreground">
         <PacmanBackground />
-        <ThemeProvider>
-          <ViewModeProvider>
-            <div className="relative z-10 flex min-h-full flex-col">
-              <Header />
-              <FloatingMenu />
-              <div className="flex flex-1 flex-col">{children}</div>
-            </div>
-          </ViewModeProvider>
-        </ThemeProvider>
+        <SWRProvider>
+          <ThemeProvider>
+            <ViewModeProvider>
+              <div className="relative z-10 flex min-h-full flex-col">
+                <Header />
+                <FloatingMenu />
+                <div className="flex flex-1 flex-col">{children}</div>
+              </div>
+            </ViewModeProvider>
+          </ThemeProvider>
+        </SWRProvider>
       </body>
     </html>
   );

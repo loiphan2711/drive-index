@@ -5,13 +5,13 @@ import type { Theme } from '@/context/theme';
 import { Header, ListBox, Popover, Separator } from '@heroui/react';
 import { LayoutGrid, LogOut, Rows3, SlidersHorizontal } from 'lucide-react';
 import { usePathname, useRouter } from 'next/navigation';
-import { startTransition, useSyncExternalStore, useTransition } from 'react';
+import { startTransition, useSyncExternalStore } from 'react';
 
 import { THEME_ICONS } from '@/constants/icon';
 import { THEMES } from '@/context/theme';
 import { useTheme } from '@/context/useTheme';
 import { useViewMode } from '@/context/useViewMode';
-import { createClient } from '@/lib/supabase/client';
+import { useSignOut } from '@/hooks/useAuth';
 
 const HEADERLESS_PATHS = ['/login', '/auth/callback'];
 
@@ -41,7 +41,7 @@ export const FloatingMenu = () => {
   const router = useRouter();
   const { setTheme, theme } = useTheme();
   const { setViewMode, viewMode } = useViewMode();
-  const [isSigningOut, startSigningOut] = useTransition();
+  const { trigger: triggerSignOut, isMutating: isSigningOut } = useSignOut();
   // Avoid hydration mismatch while resolving current theme icon.
   const mounted = useSyncExternalStore(
     () => () => {},
@@ -59,14 +59,12 @@ export const FloatingMenu = () => {
       : 'system';
 
   const signOut = () => {
-    startSigningOut(() => {
-      void (async () => {
-        const supabase = createClient();
-        await supabase.auth.signOut();
+    void triggerSignOut()
+      .then(() => {
         router.replace('/login');
         router.refresh();
-      })();
-    });
+      })
+      .catch(() => null);
   };
 
   return (

@@ -3,6 +3,7 @@
 import type { DriveItem, FileCategory } from '@/type/file';
 import { FILE_CATEGORY_STYLES } from '@/constants/file-type';
 import { useViewMode } from '@/context/useViewMode';
+import { useDriveItems } from '@/hooks/useDriveItems';
 
 const FILE_CATEGORY_BY_EXTENSION: Partial<Record<string, FileCategory>> = {
   csv: 'spreadsheet',
@@ -20,82 +21,6 @@ const FILE_CATEGORY_BY_EXTENSION: Partial<Record<string, FileCategory>> = {
   xls: 'spreadsheet',
   xlsx: 'spreadsheet',
 };
-
-const DRIVE_ITEMS: DriveItem[] = [
-  {
-    id: 'design-system',
-    location: '/shared/ui',
-    modifiedAt: '2 hours ago',
-    name: 'Design System',
-    size: '18 items',
-    type: 'Folder',
-  },
-  {
-    extension: 'xlsx',
-    id: 'q1-budget',
-    location: '/finance/reports',
-    modifiedAt: 'Yesterday',
-    name: 'Q1 Budget.xlsx',
-    size: '2.1 MB',
-    type: 'File',
-  },
-  {
-    id: 'launch-assets',
-    location: '/marketing/launch',
-    modifiedAt: 'Mar 30',
-    name: 'Launch Assets',
-    size: '34 items',
-    type: 'Folder',
-  },
-  {
-    extension: 'md',
-    id: 'roadmap',
-    location: '/product',
-    modifiedAt: 'Mar 28',
-    name: 'Roadmap Notes.md',
-    size: '48 KB',
-    type: 'File',
-  },
-  {
-    id: 'customer-research',
-    location: '/research/interviews',
-    modifiedAt: 'Mar 24',
-    name: 'Customer Research',
-    size: '12 items',
-    type: 'Folder',
-  },
-  {
-    extension: 'pdf',
-    id: 'release-checklist',
-    location: '/ops/releases',
-    modifiedAt: 'Mar 21',
-    name: 'Release Checklist.pdf',
-    size: '640 KB',
-    type: 'File',
-  },
-  {
-    extension: 'jpg',
-    id: 'brand-shoot',
-    location: '/marketing/photoshoot',
-    modifiedAt: 'Mar 19',
-    name: 'Brand Shoot Hero.jpg',
-    size: '5.8 MB',
-    thumbnailUrl:
-      'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=900&q=80',
-    type: 'File',
-  },
-  {
-    extension: 'png',
-    id: 'workspace-mockup',
-    location: '/design/mockups',
-    modifiedAt: 'Mar 18',
-    name: 'Workspace Mockup.png',
-    size: '3.4 MB',
-    thumbnailUrl:
-      'https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=900&q=80',
-    type: 'File',
-  },
-];
 
 function getFileCategory(item: DriveItem): FileCategory {
   if (item.type === 'Folder') {
@@ -273,14 +198,15 @@ function DriveTable({ items }: { items: DriveItem[] }) {
 
 export function DriveIndexContent() {
   const { viewMode } = useViewMode();
+  const { data: items = [] } = useDriveItems();
 
   return (
     <div className="min-h-full">
       <main className="mx-auto flex w-full max-w-7xl flex-1 flex-col gap-8 px-4 py-8 sm:px-6 lg:px-8">
         {viewMode === 'grid' ? (
-          <DriveGrid items={DRIVE_ITEMS} />
+          <DriveGrid items={items} />
         ) : (
-          <DriveTable items={DRIVE_ITEMS} />
+          <DriveTable items={items} />
         )}
       </main>
     </div>

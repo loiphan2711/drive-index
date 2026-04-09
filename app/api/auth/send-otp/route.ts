@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
 
-import { parseAllowedEmails, toAllowedEmail } from '@/lib/auth/allowlist';
 import { createClient } from '@/lib/supabase/server';
+import { parseAllowedEmails, toAllowedEmail } from '@/utils/auth';
 
 type SendOtpPayload = {
   email?: string;

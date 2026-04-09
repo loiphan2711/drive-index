@@ -5,7 +5,7 @@ const GHOST_PATH =
 
 const GHOSTS = ['1', '2', '3', '4'] as const;
 
-export function PacmanBackground() {
+export const PacmanBackground = () => {
   return (
     <div
       aria-hidden
@@ -34,4 +34,4 @@ export function PacmanBackground() {
       ))}
     </div>
   );
-}
+};
