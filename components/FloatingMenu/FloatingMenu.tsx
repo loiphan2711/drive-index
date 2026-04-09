@@ -74,13 +74,13 @@ export const FloatingMenu = () => {
       <Popover>
         <Popover.Trigger
           aria-label="Open settings menu"
-          className="flex size-14 items-center justify-center rounded-full bg-primary text-white shadow-[0_4px_24px_-4px_rgb(var(--primary-rgb)/0.5)] transition-transform hover:scale-[1.02] focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+          className="shadow-pixel flex size-14 items-center justify-center rounded-none border-2 border-foreground bg-primary text-white transition-[transform,box-shadow] duration-100 hover:translate-x-[4px] hover:translate-y-[4px] hover:shadow-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background"
         >
           <SlidersHorizontal aria-hidden className="size-5" />
         </Popover.Trigger>
         <Popover.Content
           placement="top end"
-          className="w-52 rounded-xl border border-foreground/10 bg-background p-1 shadow-[0_8px_32px_-8px_rgb(var(--ink-rgb)/0.25)]"
+          className="shadow-pixel w-52 rounded-none border-2 border-foreground bg-background p-1"
         >
           <Popover.Dialog>
             <ListBox
@@ -100,7 +100,7 @@ export const FloatingMenu = () => {
               }}
             >
               <ListBox.Section>
-                <Header className="px-2 pt-1.5 pb-1 text-[10px] font-semibold uppercase tracking-[0.18em] text-foreground/40">
+                <Header className="px-2 pt-1.5 pb-1 text-[8px] font-semibold uppercase tracking-[0.12em] text-foreground/40">
                   View Mode
                 </Header>
                 <ListBox.Item id="grid" textValue="Grid">
@@ -120,7 +120,7 @@ export const FloatingMenu = () => {
               </ListBox.Section>
             </ListBox>
 
-            <Separator className="my-1 border-foreground/10" />
+            <Separator className="my-1 border-foreground/25" />
 
             <ListBox
               aria-label="Theme"
@@ -139,7 +139,7 @@ export const FloatingMenu = () => {
               }}
             >
               <ListBox.Section>
-                <Header className="px-2 pt-1.5 pb-1 text-[10px] font-semibold uppercase tracking-[0.18em] text-foreground/40">
+                <Header className="px-2 pt-1.5 pb-1 text-[8px] font-semibold uppercase tracking-[0.12em] text-foreground/40">
                   Theme
                 </Header>
                 {THEMES.map((nextTheme) => (
@@ -158,7 +158,7 @@ export const FloatingMenu = () => {
               </ListBox.Section>
             </ListBox>
 
-            <Separator className="my-1 border-foreground/10" />
+            <Separator className="my-1 border-foreground/25" />
 
             <ListBox
               aria-label="Account actions"
@@ -171,7 +171,7 @@ export const FloatingMenu = () => {
               }}
             >
               <ListBox.Section>
-                <Header className="px-2 pt-1.5 pb-1 text-[10px] font-semibold uppercase tracking-[0.18em] text-foreground/40">
+                <Header className="px-2 pt-1.5 pb-1 text-[8px] font-semibold uppercase tracking-[0.12em] text-foreground/40">
                   Account
                 </Header>
                 <ListBox.Item

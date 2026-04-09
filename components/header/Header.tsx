@@ -18,13 +18,13 @@ export const Header = () => {
 
   return (
     <>
-      <header className="sticky top-0 z-40 border-b border-foreground/10 bg-background/95 backdrop-blur-sm">
+      <header className="sticky top-0 z-40 border-b-2 border-foreground bg-default">
         <div className="mx-auto flex h-16 w-full max-w-7xl items-center gap-3 px-4 sm:px-6 lg:px-8">
           <div className="min-w-0 flex-1">
-            <p className="text-[11px] font-medium uppercase tracking-[0.24em] text-foreground/45">
+            <p className="text-[8px] font-medium uppercase tracking-[0.12em] text-foreground/45">
               Workspace
             </p>
-            <h1 className="truncate font-display text-2xl tracking-wide uppercase">
+            <h1 className="truncate font-display text-xl tracking-wide uppercase">
               Drive Index
             </h1>
           </div>

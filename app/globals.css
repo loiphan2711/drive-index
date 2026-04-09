@@ -5,76 +5,74 @@
 
 :root,
 :root.light {
-  --primary: #7107e7;
-  --secondary: #3f6cff;
+  --primary: #2a3fe5;
+  --secondary: #f4b9b0;
   --accent-green: #16a34a;
-  --purple-light: #c9a8ff;
-  --primary-rgb: 113 7 231;
-  --secondary-rgb: 63 108 255;
+  --accent-warning: #d97706;
+  --accent-danger: #dc2626;
+  --secondary-light: #fde4e1;
+  --primary-rgb: 42 63 229;
+  --secondary-rgb: 244 185 176;
   --accent-green-rgb: 22 163 74;
-  --purple-light-rgb: 201 168 255;
-  --ink-rgb: 28 32 43;
-  --light-rgb: 223 231 255;
-  --white-rgb: 255 255 255;
-  --background: #dfe7ff;
-  --foreground: #1c202b;
-  /* HeroUI default/hover: soft lavender to match brand purple/blue */
-  --default: oklch(88% 0.03 278);
-  --default-hover: oklch(83% 0.045 278);
-  --cmdk-divider: rgb(var(--ink-rgb) / 0.08);
-  --cmdk-footer-bg: rgb(var(--ink-rgb) / 0.04);
-  --cmdk-heading-color: rgb(28 57 142 / 0.55);
-  --cmdk-icon-bg: rgb(var(--primary-rgb) / 0.07);
+  --ink-rgb: 17 24 39;
+  --light-rgb: 249 250 251;
+  --background: #ffffff;
+  --foreground: #111827;
+  --default: oklch(98% 0 0);
+  --default-hover: oklch(94% 0 0);
+  --shadow-pixel: 4px 4px 0px var(--foreground);
+  --shadow-pixel-sm: 2px 2px 0px var(--foreground);
+  --shadow-pixel-primary: 4px 4px 0px var(--primary);
+  --border-dotted-width: 2px;
+  --cmdk-divider: rgb(var(--ink-rgb) / 0.12);
+  --cmdk-footer-bg: rgb(var(--ink-rgb) / 0.05);
+  --cmdk-heading-color: rgb(var(--primary-rgb) / 0.72);
+  --cmdk-icon-bg: rgb(var(--primary-rgb) / 0.08);
   --cmdk-icon-text: var(--primary);
-  --cmdk-input-bg: rgb(var(--ink-rgb) / 0.04);
-  --cmdk-input-border: rgb(var(--ink-rgb) / 0.12);
-  --cmdk-input-inset: rgb(var(--ink-rgb) / 0.05);
-  --cmdk-item-hover-bg: rgb(var(--primary-rgb) / 0.06);
-  --cmdk-item-hover-border: rgb(var(--primary-rgb) / 0.18);
+  --cmdk-input-bg: var(--background);
+  --cmdk-input-border: rgb(var(--ink-rgb) / 0.3);
+  --cmdk-item-hover-bg: rgb(var(--primary-rgb) / 0.08);
+  --cmdk-item-hover-border: rgb(var(--primary-rgb) / 0.35);
   --cmdk-kbd-bg: rgb(var(--ink-rgb) / 0.05);
-  --cmdk-kbd-border: rgb(var(--ink-rgb) / 0.12);
-  --cmdk-kbd-inset: rgb(var(--white-rgb) / 0.72);
-  --cmdk-kbd-text: rgb(var(--ink-rgb) / 0.6);
-  --cmdk-overlay-bg: rgb(var(--ink-rgb) / 0.55);
-  --cmdk-panel-bg: oklch(97% 0.018 272);
-  --cmdk-panel-border: rgb(var(--primary-rgb) / 0.14);
-  --cmdk-panel-shadow: none;
+  --cmdk-kbd-border: rgb(var(--ink-rgb) / 0.3);
+  --cmdk-kbd-text: rgb(var(--ink-rgb) / 0.72);
+  --cmdk-overlay-bg: rgb(0 0 0 / 0.72);
+  --cmdk-panel-bg: #ffffff;
+  --cmdk-panel-border: var(--foreground);
+  --cmdk-panel-shadow: var(--shadow-pixel);
   --cmdk-text: var(--foreground);
-  --cmdk-text-faint: rgb(var(--ink-rgb) / 0.35);
-  --cmdk-text-muted: rgb(var(--ink-rgb) / 0.5);
+  --cmdk-text-faint: rgb(var(--ink-rgb) / 0.4);
+  --cmdk-text-muted: rgb(var(--ink-rgb) / 0.6);
   --cmdk-highlight-bg: rgb(var(--primary-rgb) / 0.12);
   --cmdk-highlight-text: var(--primary);
 }
 
 :root.dark {
-  --background: #1c202b;
-  --foreground: #dfe7ff;
-  /* HeroUI default/hover: deep purple-tinted to match brand on dark bg */
-  --default: oklch(30% 0.04 278);
-  --default-hover: oklch(36% 0.055 278);
-  --cmdk-divider: rgb(var(--light-rgb) / 0.08);
+  --background: #000000;
+  --foreground: #f9fafb;
+  --default: oklch(24% 0 0);
+  --default-hover: oklch(30% 0 0);
+  --cmdk-divider: rgb(var(--light-rgb) / 0.14);
   --cmdk-footer-bg: rgb(var(--light-rgb) / 0.04);
-  --cmdk-heading-color: rgb(var(--purple-light-rgb) / 0.72);
-  --cmdk-icon-bg: rgb(var(--primary-rgb) / 0.12);
-  --cmdk-icon-text: var(--purple-light);
-  --cmdk-input-bg: rgb(var(--light-rgb) / 0.05);
-  --cmdk-input-border: rgb(var(--primary-rgb) / 0.2);
-  --cmdk-input-inset: rgb(var(--light-rgb) / 0.04);
-  --cmdk-item-hover-bg: rgb(var(--primary-rgb) / 0.1);
-  --cmdk-item-hover-border: rgb(var(--primary-rgb) / 0.25);
+  --cmdk-heading-color: var(--secondary-light);
+  --cmdk-icon-bg: rgb(var(--primary-rgb) / 0.2);
+  --cmdk-icon-text: var(--secondary-light);
+  --cmdk-input-bg: #0a0a0a;
+  --cmdk-input-border: rgb(var(--primary-rgb) / 0.55);
+  --cmdk-item-hover-bg: rgb(var(--primary-rgb) / 0.14);
+  --cmdk-item-hover-border: rgb(var(--primary-rgb) / 0.45);
   --cmdk-kbd-bg: rgb(var(--light-rgb) / 0.06);
-  --cmdk-kbd-border: rgb(var(--primary-rgb) / 0.22);
-  --cmdk-kbd-inset: rgb(var(--light-rgb) / 0.06);
-  --cmdk-kbd-text: rgb(var(--light-rgb) / 0.72);
-  --cmdk-overlay-bg: rgb(var(--ink-rgb) / 0.78);
-  --cmdk-panel-bg: oklch(23% 0.025 278);
-  --cmdk-panel-border: rgb(var(--primary-rgb) / 0.22);
-  --cmdk-panel-shadow: none;
+  --cmdk-kbd-border: rgb(var(--primary-rgb) / 0.42);
+  --cmdk-kbd-text: rgb(var(--light-rgb) / 0.82);
+  --cmdk-overlay-bg: rgb(0 0 0 / 0.85);
+  --cmdk-panel-bg: #0a0a0a;
+  --cmdk-panel-border: var(--primary);
+  --cmdk-panel-shadow: var(--shadow-pixel-primary);
   --cmdk-text: var(--foreground);
-  --cmdk-text-faint: rgb(var(--light-rgb) / 0.36);
-  --cmdk-text-muted: rgb(var(--light-rgb) / 0.48);
+  --cmdk-text-faint: rgb(var(--light-rgb) / 0.42);
+  --cmdk-text-muted: rgb(var(--light-rgb) / 0.62);
   --cmdk-highlight-bg: rgb(var(--primary-rgb) / 0.25);
-  --cmdk-highlight-text: var(--purple-light);
+  --cmdk-highlight-text: var(--secondary-light);
 }
 
 @theme inline {
@@ -83,48 +81,68 @@
   --color-primary: var(--primary);
   --color-secondary: var(--secondary);
   --color-accent-green: var(--accent-green);
-  --color-purple-light: var(--purple-light);
-  --font-sans: var(--font-jetbrains-mono);
-  --font-mono: var(--font-jetbrains-mono);
-  --font-display: var(--font-bangers);
+  --color-warning: var(--accent-warning);
+  --color-danger: var(--accent-danger);
+  --color-secondary-light: var(--secondary-light);
+  --font-sans: var(--font-space-mono);
+  --font-mono: var(--font-space-mono);
+  --font-display: var(--font-press-start);
+}
+
+@layer utilities {
+  .shadow-pixel {
+    box-shadow: var(--shadow-pixel);
+  }
+
+  .shadow-pixel-sm {
+    box-shadow: var(--shadow-pixel-sm);
+  }
+
+  .shadow-pixel-primary {
+    box-shadow: var(--shadow-pixel-primary);
+  }
+
+  .border-dotted-2 {
+    border-style: dotted;
+    border-width: var(--border-dotted-width);
+  }
 }
 
 @media (prefers-color-scheme: dark) {
   :root:not(.light) {
-    --background: #1c202b;
-    --foreground: #dfe7ff;
-    --default: oklch(30% 0.04 278);
-    --default-hover: oklch(36% 0.055 278);
-    --cmdk-divider: rgb(var(--light-rgb) / 0.08);
+    --background: #000000;
+    --foreground: #f9fafb;
+    --default: oklch(24% 0 0);
+    --default-hover: oklch(30% 0 0);
+    --cmdk-divider: rgb(var(--light-rgb) / 0.14);
     --cmdk-footer-bg: rgb(var(--light-rgb) / 0.04);
-    --cmdk-heading-color: rgb(var(--purple-light-rgb) / 0.72);
-    --cmdk-icon-bg: rgb(var(--primary-rgb) / 0.12);
-    --cmdk-icon-text: var(--purple-light);
-    --cmdk-input-bg: rgb(var(--light-rgb) / 0.05);
-    --cmdk-input-border: rgb(var(--primary-rgb) / 0.2);
-    --cmdk-input-inset: rgb(var(--light-rgb) / 0.04);
-    --cmdk-item-hover-bg: rgb(var(--primary-rgb) / 0.1);
-    --cmdk-item-hover-border: rgb(var(--primary-rgb) / 0.25);
+    --cmdk-heading-color: var(--secondary-light);
+    --cmdk-icon-bg: rgb(var(--primary-rgb) / 0.2);
+    --cmdk-icon-text: var(--secondary-light);
+    --cmdk-input-bg: #0a0a0a;
+    --cmdk-input-border: rgb(var(--primary-rgb) / 0.55);
+    --cmdk-item-hover-bg: rgb(var(--primary-rgb) / 0.14);
+    --cmdk-item-hover-border: rgb(var(--primary-rgb) / 0.45);
     --cmdk-kbd-bg: rgb(var(--light-rgb) / 0.06);
-    --cmdk-kbd-border: rgb(var(--primary-rgb) / 0.22);
-    --cmdk-kbd-inset: rgb(var(--light-rgb) / 0.06);
-    --cmdk-kbd-text: rgb(var(--light-rgb) / 0.72);
-    --cmdk-overlay-bg: rgb(var(--ink-rgb) / 0.78);
-    --cmdk-panel-bg: oklch(23% 0.025 278);
-    --cmdk-panel-border: rgb(var(--primary-rgb) / 0.22);
-    --cmdk-panel-shadow: none;
+    --cmdk-kbd-border: rgb(var(--primary-rgb) / 0.42);
+    --cmdk-kbd-text: rgb(var(--light-rgb) / 0.82);
+    --cmdk-overlay-bg: rgb(0 0 0 / 0.85);
+    --cmdk-panel-bg: #0a0a0a;
+    --cmdk-panel-border: var(--primary);
+    --cmdk-panel-shadow: var(--shadow-pixel-primary);
     --cmdk-text: var(--foreground);
-    --cmdk-text-faint: rgb(var(--light-rgb) / 0.36);
-    --cmdk-text-muted: rgb(var(--light-rgb) / 0.48);
+    --cmdk-text-faint: rgb(var(--light-rgb) / 0.42);
+    --cmdk-text-muted: rgb(var(--light-rgb) / 0.62);
     --cmdk-highlight-bg: rgb(var(--primary-rgb) / 0.25);
-    --cmdk-highlight-text: var(--purple-light);
+    --cmdk-highlight-text: var(--secondary-light);
   }
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: var(--font-jetbrains-mono), 'Courier New', monospace;
+  font-family: var(--font-space-mono), 'Courier New', monospace;
+  image-rendering: pixelated;
 }
 
 @keyframes cmdk-overlay-in {
@@ -176,7 +194,6 @@ body {
   inset: 0;
   z-index: 70;
   background: var(--cmdk-overlay-bg);
-  backdrop-filter: blur(5px);
 }
 
 [cmdk-overlay][data-state='open'] {
@@ -300,17 +317,6 @@ body {
   }
 }
 
-@keyframes auth-float {
-  0%,
-  100% {
-    transform: translate3d(0, 0, 0);
-  }
-
-  50% {
-    transform: translate3d(0, -14px, 0);
-  }
-}
-
 @keyframes auth-digit-pop {
   from {
     box-shadow: 0 0 0 0 rgb(var(--primary-rgb) / 0);
@@ -340,9 +346,11 @@ body {
 
 .auth-login-grid {
   background-image:
-    linear-gradient(rgb(var(--primary-rgb) / 0.1) 1px, transparent 1px),
-    linear-gradient(90deg, rgb(var(--primary-rgb) / 0.1) 1px, transparent 1px);
-  background-size: 42px 42px;
+    linear-gradient(rgb(var(--primary-rgb) / 0.1) 2px, transparent 2px),
+    linear-gradient(90deg, rgb(var(--primary-rgb) / 0.1) 2px, transparent 2px),
+    linear-gradient(rgb(var(--primary-rgb) / 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgb(var(--primary-rgb) / 0.04) 1px, transparent 1px);
+  background-size: 42px 42px, 42px 42px, 14px 14px, 14px 14px;
   animation: auth-grid-shift 18s linear infinite alternate;
   mask-image: radial-gradient(circle at center, black 42%, transparent 88%);
   -webkit-mask-image: radial-gradient(
@@ -364,15 +372,6 @@ body {
   animation: auth-banner-in 220ms ease-out both;
 }
 
-.auth-orb {
-  animation: auth-float 12s ease-in-out infinite;
-  will-change: transform;
-}
-
-.auth-orb-delay {
-  animation-delay: -4s;
-}
-
 .auth-progress-bar {
   transition: width 260ms cubic-bezier(0.16, 1, 0.3, 1);
 }
@@ -387,12 +386,11 @@ body {
 
 .dark .auth-login-grid {
   background-image:
-    linear-gradient(rgb(var(--purple-light-rgb) / 0.08) 1px, transparent 1px),
-    linear-gradient(
-      90deg,
-      rgb(var(--purple-light-rgb) / 0.08) 1px,
-      transparent 1px
-    );
+    linear-gradient(rgb(var(--primary-rgb) / 0.15) 2px, transparent 2px),
+    linear-gradient(90deg, rgb(var(--primary-rgb) / 0.15) 2px, transparent 2px),
+    linear-gradient(rgb(var(--primary-rgb) / 0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgb(var(--primary-rgb) / 0.06) 1px, transparent 1px);
+  background-size: 42px 42px, 42px 42px, 14px 14px, 14px 14px;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -400,12 +398,408 @@ body {
   .auth-panel,
   .auth-stage,
   .auth-banner,
-  .auth-orb,
-  .auth-code-cell-filled {
+  .auth-code-cell-filled,
+  .input-otp__slot[data-filled='true'],
+  .pacman-bg__pacman,
+  .pacman-bg__pacman--down,
+  .pacman-bg__ghost--1,
+  .pacman-bg__ghost--2,
+  .pacman-bg__ghost--3,
+  .pacman-bg__ghost--4,
+  .pacman-bg__power-pellet,
+  .auth-pacman-login {
     animation: none !important;
   }
 
   .auth-progress-bar {
     transition-duration: 0ms !important;
   }
+
+  .pacman-bg__pacman {
+    opacity: 0.55;
+  }
+
+  .pacman-bg__pacman--down {
+    opacity: 0.55;
+  }
+}
+
+@keyframes pacman-chomp {
+  0% {
+    clip-path: polygon(
+      50% 50%,
+      100% 15%,
+      100% 0%,
+      0% 0%,
+      0% 100%,
+      100% 100%,
+      100% 85%
+    );
+  }
+
+  25% {
+    clip-path: polygon(
+      50% 50%,
+      100% 50%,
+      100% 0%,
+      0% 0%,
+      0% 100%,
+      100% 100%,
+      100% 50%
+    );
+  }
+
+  50% {
+    clip-path: polygon(
+      50% 50%,
+      100% 15%,
+      100% 0%,
+      0% 0%,
+      0% 100%,
+      100% 100%,
+      100% 85%
+    );
+  }
+
+  100% {
+    clip-path: polygon(
+      50% 50%,
+      100% 15%,
+      100% 0%,
+      0% 0%,
+      0% 100%,
+      100% 100%,
+      100% 85%
+    );
+  }
+}
+
+@keyframes pacman-travel {
+  0% {
+    transform: translateX(-80px);
+    opacity: 0;
+  }
+
+  5% {
+    opacity: 1;
+  }
+
+  95% {
+    opacity: 1;
+  }
+
+  100% {
+    transform: translateX(calc(100vw + 80px));
+    opacity: 0;
+  }
+}
+
+@keyframes pacman-chomp-down {
+  0% {
+    clip-path: polygon(
+      50% 50%,
+      15% 100%,
+      0% 100%,
+      0% 0%,
+      100% 0%,
+      100% 100%,
+      85% 100%
+    );
+  }
+
+  25% {
+    clip-path: polygon(
+      50% 50%,
+      50% 100%,
+      0% 100%,
+      0% 0%,
+      100% 0%,
+      100% 100%,
+      50% 100%
+    );
+  }
+
+  50% {
+    clip-path: polygon(
+      50% 50%,
+      15% 100%,
+      0% 100%,
+      0% 0%,
+      100% 0%,
+      100% 100%,
+      85% 100%
+    );
+  }
+
+  100% {
+    clip-path: polygon(
+      50% 50%,
+      15% 100%,
+      0% 100%,
+      0% 0%,
+      100% 0%,
+      100% 100%,
+      85% 100%
+    );
+  }
+}
+
+@keyframes pacman-travel-down {
+  0% {
+    transform: translateY(-80px);
+    opacity: 0;
+  }
+
+  5% {
+    opacity: 1;
+  }
+
+  95% {
+    opacity: 1;
+  }
+
+  100% {
+    transform: translateY(calc(100vh + 80px));
+    opacity: 0;
+  }
+}
+
+
+@keyframes ghost-float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-12px);
+  }
+}
+
+@keyframes ghost-drift {
+  0% {
+    transform: translateX(0) translateY(0);
+  }
+
+  33% {
+    transform: translateX(8px) translateY(-8px);
+  }
+
+  66% {
+    transform: translateX(-5px) translateY(-14px);
+  }
+
+  100% {
+    transform: translateX(0) translateY(0);
+  }
+}
+
+@keyframes power-pellet-pulse {
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 0.55;
+    box-shadow: 0 0 0 0 rgb(var(--primary-rgb) / 0.3);
+  }
+
+  50% {
+    transform: scale(1.18);
+    opacity: 0.75;
+    box-shadow: 0 0 0 8px rgb(var(--primary-rgb) / 0);
+  }
+}
+
+.pacman-bg__maze {
+  background-image:
+    linear-gradient(rgb(var(--primary-rgb) / 0.07) 2px, transparent 2px),
+    linear-gradient(90deg, rgb(var(--primary-rgb) / 0.07) 2px, transparent 2px),
+    linear-gradient(rgb(var(--primary-rgb) / 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgb(var(--primary-rgb) / 0.03) 1px, transparent 1px);
+  background-size: 48px 48px, 48px 48px, 16px 16px, 16px 16px;
+}
+
+.dark .pacman-bg__maze {
+  background-image:
+    linear-gradient(rgb(var(--primary-rgb) / 0.12) 2px, transparent 2px),
+    linear-gradient(90deg, rgb(var(--primary-rgb) / 0.12) 2px, transparent 2px),
+    linear-gradient(rgb(var(--primary-rgb) / 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgb(var(--primary-rgb) / 0.05) 1px, transparent 1px);
+  background-size: 48px 48px, 48px 48px, 16px 16px, 16px 16px;
+}
+
+.pacman-bg__pellets {
+  background-image: radial-gradient(
+    circle,
+    rgb(var(--primary-rgb) / 0.18) 2px,
+    transparent 2px
+  );
+  background-size: 24px 24px;
+  background-position: 12px 12px;
+}
+
+.dark .pacman-bg__pellets {
+  background-image: radial-gradient(
+    circle,
+    rgb(var(--primary-rgb) / 0.28) 2px,
+    transparent 2px
+  );
+  background-size: 24px 24px;
+  background-position: 12px 12px;
+}
+
+.pacman-bg__power-pellet {
+  position: absolute;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background-color: rgb(var(--primary-rgb) / 0.5);
+  animation: power-pellet-pulse 2.4s ease-in-out infinite;
+}
+
+.dark .pacman-bg__power-pellet {
+  background-color: rgb(var(--primary-rgb) / 0.65);
+}
+
+.pacman-bg__power-pellet--tl {
+  top: 48px;
+  left: 48px;
+  animation-delay: 0s;
+}
+
+.pacman-bg__power-pellet--tr {
+  top: 48px;
+  right: 48px;
+  animation-delay: 0.6s;
+}
+
+.pacman-bg__power-pellet--bl {
+  bottom: 48px;
+  left: 48px;
+  animation-delay: 1.2s;
+}
+
+.pacman-bg__power-pellet--br {
+  right: 48px;
+  bottom: 48px;
+  animation-delay: 1.8s;
+}
+
+.pacman-bg__pacman {
+  position: absolute;
+  bottom: 20%;
+  left: 0;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background-color: #f4c430;
+  clip-path: polygon(
+    50% 50%,
+    100% 15%,
+    100% 0%,
+    0% 0%,
+    0% 100%,
+    100% 100%,
+    100% 85%
+  );
+  animation:
+    pacman-chomp 0.28s linear infinite,
+    pacman-travel 14s linear 2s infinite;
+  opacity: 0;
+}
+
+.pacman-bg__pacman--down {
+  position: absolute;
+  top: 0;
+  right: 8%;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background-color: #f4c430;
+  clip-path: polygon(
+    50% 50%,
+    15% 100%,
+    0% 100%,
+    0% 0%,
+    100% 0%,
+    100% 100%,
+    85% 100%
+  );
+  animation:
+    pacman-chomp-down 0.28s linear infinite,
+    pacman-travel-down 16s linear 7s infinite;
+  opacity: 0;
+}
+
+.pacman-bg__ghost {
+  position: absolute;
+  width: 28px;
+  height: 35px;
+  fill: currentColor;
+}
+
+.pacman-bg__ghost--1 {
+  top: 15%;
+  right: 12%;
+  color: rgb(var(--primary-rgb) / 0.2);
+  animation: ghost-float 4.2s ease-in-out infinite;
+}
+
+.dark .pacman-bg__ghost--1 {
+  color: rgb(var(--primary-rgb) / 0.35);
+}
+
+.pacman-bg__ghost--2 {
+  top: 55%;
+  left: 8%;
+  color: rgb(var(--secondary-rgb) / 0.2);
+  animation: ghost-drift 6.8s ease-in-out 1.1s infinite;
+}
+
+.dark .pacman-bg__ghost--2 {
+  color: rgb(var(--secondary-rgb) / 0.3);
+}
+
+.pacman-bg__ghost--3 {
+  right: 18%;
+  bottom: 22%;
+  color: rgb(214 119 6 / 0.18);
+  animation: ghost-float 5.5s ease-in-out 2.2s infinite;
+}
+
+.dark .pacman-bg__ghost--3 {
+  color: rgb(214 119 6 / 0.3);
+}
+
+.pacman-bg__ghost--4 {
+  top: 28%;
+  left: 22%;
+  color: rgb(220 38 38 / 0.16);
+  animation: ghost-drift 7.4s ease-in-out 0.7s infinite;
+}
+
+.dark .pacman-bg__ghost--4 {
+  color: rgb(220 38 38 / 0.28);
+}
+
+.auth-pacman-login {
+  position: absolute;
+  bottom: 32px;
+  left: 50%;
+  width: 24px;
+  height: 24px;
+  transform: translateX(-50%);
+  border-radius: 50%;
+  background-color: #f4c430;
+  clip-path: polygon(
+    50% 50%,
+    100% 15%,
+    100% 0%,
+    0% 0%,
+    0% 100%,
+    100% 100%,
+    100% 85%
+  );
+  animation: pacman-chomp 0.28s linear infinite;
+  opacity: 0.45;
+  pointer-events: none;
 }

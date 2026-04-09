@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
-import { Bangers, JetBrains_Mono } from 'next/font/google';
+import { Press_Start_2P, Space_Mono } from 'next/font/google';
 
+import { PacmanBackground } from '@/components/background';
 import { FloatingMenu } from '@/components/FloatingMenu';
 import { Header } from '@/components/header';
 import { ThemeProvider } from '@/context/ThemeContext';
@@ -8,16 +9,18 @@ import { ViewModeProvider } from '@/context/ViewModeContext';
 
 import './globals.css';
 
-const bangers = Bangers({
-  variable: '--font-bangers',
+const pressStart2P = Press_Start_2P({
+  variable: '--font-press-start',
   subsets: ['latin'],
   weight: '400',
+  display: 'swap',
 });
 
-const jetbrainsMono = JetBrains_Mono({
-  variable: '--font-jetbrains-mono',
+const spaceMono = Space_Mono({
+  variable: '--font-space-mono',
   subsets: ['latin'],
-  weight: ['400', '500', '600', '700'],
+  weight: ['400', '700'],
+  display: 'swap',
 });
 
 export const metadata: Metadata = {
@@ -34,15 +37,18 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${bangers.variable} ${jetbrainsMono.variable} h-full antialiased`}
+      className={`${pressStart2P.variable} ${spaceMono.variable} h-full antialiased`}
       suppressHydrationWarning
     >
       <body className="min-h-full bg-background font-sans text-foreground">
+        <PacmanBackground />
         <ThemeProvider>
           <ViewModeProvider>
-            <Header />
-            <FloatingMenu />
-            <div className="flex flex-1 flex-col">{children}</div>
+            <div className="relative z-10 flex min-h-full flex-col">
+              <Header />
+              <FloatingMenu />
+              <div className="flex flex-1 flex-col">{children}</div>
+            </div>
           </ViewModeProvider>
         </ThemeProvider>
       </body>

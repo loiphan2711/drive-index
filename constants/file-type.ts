@@ -10,57 +10,51 @@ import {
 
 export const FILE_CATEGORY_STYLES: Record<FileCategory, FileCategoryStyle> = {
   document: {
-    accent: 'border-t-blue-600/55 dark:border-t-blue-300/45',
+    accent: 'border-t-blue-600 dark:border-t-blue-300',
     color:
-      'border-blue-600/25 bg-blue-600/12 text-blue-700 dark:border-blue-300/30 dark:bg-blue-300/14 dark:text-blue-100',
+      'border-2 border-blue-600 bg-blue-600/15 text-blue-700 dark:border-blue-300 dark:bg-blue-300/15 dark:text-blue-100',
     icon: FileText,
     label: 'Document',
     overlayColor:
-      'border-blue-600/25 text-blue-700 dark:border-blue-300/30 dark:text-blue-100',
+      'border-2 border-blue-600 bg-background text-blue-700 dark:border-blue-300 dark:text-blue-100',
   },
   folder: {
-    accent: 'border-t-amber-500/55 dark:border-t-amber-300/45',
+    accent: 'border-t-amber-500 dark:border-t-amber-300',
     color:
-      'border-amber-500/25 bg-amber-500/12 text-amber-700 dark:border-amber-300/30 dark:bg-amber-300/14 dark:text-amber-100',
+      'border-2 border-amber-500 bg-amber-500/15 text-amber-700 dark:border-amber-300 dark:bg-amber-300/15 dark:text-amber-100',
     icon: FolderOpen,
     label: 'Folder',
     overlayColor:
-      'border-amber-500/25 text-amber-700 dark:border-amber-300/30 dark:text-amber-100',
+      'border-2 border-amber-500 bg-background text-amber-700 dark:border-amber-300 dark:text-amber-100',
   },
   generic: {
-    accent: 'border-t-slate-500/40 dark:border-t-slate-300/35',
-    color:
-      'border-slate-500/20 bg-slate-500/10 text-slate-700 dark:border-slate-300/25 dark:bg-slate-300/12 dark:text-slate-100',
+    accent: 'border-t-foreground/40',
+    color: 'border-2 border-foreground/30 bg-foreground/8 text-foreground/70',
     icon: File,
     label: 'File',
     overlayColor:
-      'border-slate-500/20 text-slate-700 dark:border-slate-300/25 dark:text-slate-100',
+      'border-2 border-foreground/30 bg-background text-foreground/70',
   },
   image: {
-    accent: 'border-t-purple-600/55 dark:border-t-purple-300/45',
-    color:
-      'border-purple-600/25 bg-purple-600/12 text-purple-700 dark:border-purple-300/30 dark:bg-purple-300/14 dark:text-purple-100',
+    accent: 'border-t-primary',
+    color: 'border-2 border-primary bg-primary/10 text-primary',
     icon: Image,
     label: 'Image',
-    overlayColor:
-      'border-purple-600/25 text-purple-700 dark:border-purple-300/30 dark:text-purple-100',
+    overlayColor: 'border-2 border-primary bg-background text-primary',
   },
   pdf: {
-    accent: 'border-t-red-600/55 dark:border-t-red-300/45',
-    color:
-      'border-red-600/25 bg-red-600/12 text-red-700 dark:border-red-300/30 dark:bg-red-300/14 dark:text-red-100',
+    accent: 'border-t-danger',
+    color: 'border-2 border-danger bg-danger/10 text-danger',
     icon: FileType,
     label: 'PDF',
-    overlayColor:
-      'border-red-600/25 text-red-700 dark:border-red-300/30 dark:text-red-100',
+    overlayColor: 'border-2 border-danger bg-background text-danger',
   },
   spreadsheet: {
-    accent: 'border-t-green-600/55 dark:border-t-green-300/45',
-    color:
-      'border-green-600/25 bg-green-600/12 text-green-700 dark:border-green-300/30 dark:bg-green-300/14 dark:text-green-100',
+    accent: 'border-t-accent-green',
+    color: 'border-2 border-accent-green bg-accent-green/10 text-accent-green',
     icon: Sheet,
     label: 'Spreadsheet',
     overlayColor:
-      'border-green-600/25 text-green-700 dark:border-green-300/30 dark:text-green-100',
+      'border-2 border-accent-green bg-background text-accent-green',
   },
 };

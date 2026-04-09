@@ -1,0 +1,1 @@
+export { PacmanBackground } from './PacmanBackground';

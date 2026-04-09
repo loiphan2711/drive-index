@@ -126,12 +126,12 @@ function DriveItemBadge({
   const Icon = style.icon;
   const badgeClassName =
     variant === 'overlay'
-      ? `border ${style.overlayColor} bg-white/90 shadow-sm dark:bg-[#1c202b]/90`
+      ? `shadow-pixel-sm ${style.overlayColor}`
       : style.color;
 
   return (
     <span
-      className={`inline-flex items-center justify-center rounded-full text-[10px] font-semibold uppercase tracking-[0.22em] ${iconOnly ? 'px-1.5 py-1' : 'gap-1.5 px-2.5 py-1'} ${badgeClassName}`}
+      className={`inline-flex items-center justify-center rounded-none text-[10px] font-semibold uppercase tracking-[0.22em] ${iconOnly ? 'px-1.5 py-1' : 'gap-1.5 px-2.5 py-1'} ${badgeClassName}`}
     >
       <Icon aria-hidden className="size-3" />
       {iconOnly ? <span className="sr-only">{style.label}</span> : style.label}
@@ -145,7 +145,7 @@ function DriveItemPreviewSlot({ item }: { item: DriveItem }) {
 
   if (item.thumbnailUrl) {
     return (
-      <div className="relative h-28 w-full overflow-hidden rounded-lg border border-foreground/10 bg-foreground/3 shadow-[inset_0_1px_0_rgba(255,255,255,0.22)] dark:shadow-[inset_0_1px_0_rgba(255,255,255,0.04)]">
+      <div className="relative h-28 w-full overflow-hidden rounded-none border-2 border-foreground/20 bg-foreground/5">
         {/* The compact preview uses a plain img for lightweight mock-data thumbnails. */}
         {/* eslint-disable-next-line next/no-img-element */}
         <img
@@ -154,20 +154,17 @@ function DriveItemPreviewSlot({ item }: { item: DriveItem }) {
           loading="lazy"
           src={item.thumbnailUrl}
         />
-        <div className="absolute inset-0 bg-linear-to-t from-black/20 via-transparent to-white/10 dark:from-black/35 dark:to-white/5" />
-        <div
-          className={`absolute bottom-1.5 right-1.5 flex size-5 items-center justify-center rounded-md border bg-background/85 shadow-sm backdrop-blur ${style.overlayColor}`}
-        >
-          <Icon aria-hidden className="size-3" />
+        <div className="absolute bottom-1.5 right-1.5">
+          <DriveItemBadge iconOnly item={item} variant="overlay" />
         </div>
       </div>
     );
   }
 
   return (
-    <div className="relative flex h-28 w-full items-center justify-center overflow-hidden rounded-lg border border-foreground/10 bg-[radial-gradient(circle_at_top_left,rgba(255,255,255,0.22),transparent_45%)] dark:bg-[radial-gradient(circle_at_top_left,rgba(255,255,255,0.08),transparent_45%)]">
+    <div className="relative flex h-28 w-full items-center justify-center overflow-hidden rounded-none border-2 border-foreground/20 bg-foreground/5">
       <div
-        className={`flex size-8 items-center justify-center rounded-md border shadow-[0_10px_24px_-18px_rgba(28,32,43,0.75)] ${style.color}`}
+        className={`shadow-pixel-sm flex size-8 items-center justify-center rounded-none ${style.color}`}
       >
         <Icon aria-hidden className="size-4" />
       </div>
@@ -184,7 +181,7 @@ function DriveGrid({ items }: { items: DriveItem[] }) {
         return (
           <article
             key={item.id}
-            className={`group isolate flex h-full flex-col overflow-hidden rounded-xl border border-foreground/10 border-t-4 bg-background/95 shadow-[0_4px_20px_-4px_rgba(28,32,43,0.25)] transition-all duration-150 will-change-transform hover:-translate-y-0.5 hover:border-b-foreground/20 hover:border-l-foreground/20 hover:border-r-foreground/20 hover:shadow-[0_12px_32px_-12px_rgba(28,32,43,0.28)] ${style.accent}`}
+            className={`group isolate flex h-full flex-col overflow-hidden rounded-none border-dotted-2 border-foreground/30 border-t-4 border-t-solid bg-background shadow-pixel-sm transition-[transform,box-shadow] duration-100 will-change-transform hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-none ${style.accent}`}
           >
             <div className="px-3 pt-3">
               <DriveItemPreviewSlot item={item} />
@@ -217,9 +214,9 @@ function DriveGrid({ items }: { items: DriveItem[] }) {
 
 function DriveTable({ items }: { items: DriveItem[] }) {
   return (
-    <div className="overflow-hidden rounded-xl border border-foreground/10 bg-background/95 shadow-[0_18px_50px_-28px_rgba(28,32,43,0.35)]">
+    <div className="overflow-hidden rounded-none border-2 border-foreground/30 bg-background shadow-pixel">
       <table className="w-full border-collapse text-left">
-        <thead className="bg-foreground/3 text-[11px] uppercase tracking-[0.22em] text-foreground/45">
+        <thead className="bg-foreground/8 text-[11px] uppercase tracking-[0.22em] text-foreground/45">
           <tr>
             <th className="px-4 py-3 font-semibold sm:px-6">Name</th>
             <th className="hidden px-4 py-3 font-semibold md:table-cell">
@@ -237,12 +234,12 @@ function DriveTable({ items }: { items: DriveItem[] }) {
             return (
               <tr
                 key={item.id}
-                className="border-t border-foreground/8 text-sm text-foreground/75 transition-colors duration-200 hover:bg-foreground/3"
+                className="border-t border-foreground/8 text-sm text-foreground/75 transition-colors duration-100 hover:bg-primary/8"
               >
                 <td className="px-4 py-4 sm:px-6">
                   <div className="flex items-center gap-3">
                     <div
-                      className={`flex size-9 shrink-0 items-center justify-center rounded-xl border ${style.color}`}
+                      className={`flex size-9 shrink-0 items-center justify-center rounded-none ${style.color}`}
                     >
                       <Icon aria-hidden className="size-4" />
                     </div>
@@ -278,7 +275,7 @@ export function DriveIndexContent() {
   const { viewMode } = useViewMode();
 
   return (
-    <div className="min-h-full bg-background">
+    <div className="min-h-full">
       <main className="mx-auto flex w-full max-w-7xl flex-1 flex-col gap-8 px-4 py-8 sm:px-6 lg:px-8">
         {viewMode === 'grid' ? (
           <DriveGrid items={DRIVE_ITEMS} />

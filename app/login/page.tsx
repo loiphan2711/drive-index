@@ -56,27 +56,14 @@ const CardShell = ({
 }) => (
   <Card
     className={cn(
-      'auth-panel relative overflow-hidden border border-foreground/18',
-      'bg-[linear-gradient(180deg,rgb(var(--white-rgb)/0.97),rgb(var(--white-rgb)/0.88))]',
-      'shadow-[0_4px_24px_-2px_rgb(var(--ink-rgb)/0.10),0_48px_80px_-40px_rgb(var(--ink-rgb)/0.18)]',
-      'backdrop-blur-xl dark:border-foreground/12',
-      'dark:bg-[linear-gradient(180deg,rgb(var(--ink-rgb)/0.96),rgb(var(--ink-rgb)/0.88))]',
-      'dark:shadow-[0_48px_120px_-52px_rgb(var(--ink-rgb)/0.6)]',
+      'auth-panel relative overflow-hidden rounded-none border-2 border-foreground bg-background',
     )}
   >
-    <div className="absolute inset-x-0 top-0 h-px bg-linear-to-r from-transparent via-primary to-transparent" />
-    <div
-      aria-hidden
-      className="pointer-events-none absolute -left-8 top-12 h-24 w-24 rounded-full bg-primary/12 blur-3xl"
-    />
-    <div
-      aria-hidden
-      className="pointer-events-none absolute -right-10 top-8 h-28 w-28 rounded-full bg-secondary/12 blur-[72px]"
-    />
+    <div className="absolute inset-x-0 top-0 h-1 bg-primary" />
 
     <Card.Header className="pb-3 pt-5">
       <div className="flex items-center gap-3">
-        <div className="flex size-9 shrink-0 items-center justify-center rounded-xl border border-foreground/18 bg-white/90 text-primary shadow-[inset_0_1px_2px_rgb(var(--ink-rgb)/0.06)] dark:border-foreground/12 dark:bg-background/75 dark:shadow-[inset_0_1px_0_rgb(var(--white-rgb)/0.05)]">
+        <div className="flex size-9 shrink-0 items-center justify-center rounded-none border-2 border-foreground bg-background text-primary">
           {step === 'email' ? (
             <Mail className="size-4" aria-hidden />
           ) : (
@@ -85,7 +72,7 @@ const CardShell = ({
         </div>
 
         <div className="min-w-0">
-          <h1 className="font-display text-2xl tracking-wide uppercase">
+          <h1 className="font-display text-xl tracking-wide uppercase">
             Drive Index
           </h1>
           <p className="text-xs text-foreground/50">{subtitle}</p>
@@ -113,10 +100,10 @@ const StatusBanner = ({
   return (
     <div
       className={cn(
-        'auth-banner flex items-start gap-3 rounded-[1.25rem] border px-4 py-3 text-[12.5px] leading-relaxed shadow-[0_16px_40px_-30px_rgb(var(--ink-rgb)/0.35)]',
+        'auth-banner shadow-pixel-sm flex items-start gap-3 rounded-none border-2 px-4 py-3 text-[12.5px] leading-relaxed',
         isError
-          ? 'border-red-500/45 bg-red-500/14 text-red-700 dark:border-red-500/28 dark:bg-red-500/8 dark:text-red-300'
-          : 'border-secondary/40 bg-secondary/12 text-foreground/80 dark:border-secondary/24 dark:bg-secondary/8 dark:text-foreground/72',
+          ? 'border-danger bg-danger/10 text-danger'
+          : 'border-accent-green bg-accent-green/10 text-accent-green',
       )}
       role={isError ? 'alert' : 'status'}
       aria-live={isError ? 'assertive' : 'polite'}
@@ -124,10 +111,7 @@ const StatusBanner = ({
       {isError ? (
         <CircleAlert className="mt-0.5 size-4 shrink-0" aria-hidden />
       ) : (
-        <ShieldCheck
-          className="mt-0.5 size-4 shrink-0 text-secondary"
-          aria-hidden
-        />
+        <ShieldCheck className="mt-0.5 size-4 shrink-0" aria-hidden />
       )}
       <p className="min-w-0">{children}</p>
     </div>
@@ -253,12 +237,9 @@ const LoginPageContent = () => {
 
           <div
             className={cn(
-              'group flex items-center gap-2.5 rounded-xl border px-3.5 py-2.5 transition-all duration-200',
-              'border-foreground/20 bg-white/95 shadow-[inset_0_1px_2px_rgb(var(--ink-rgb)/0.06)]',
-              'hover:border-foreground/30',
-              'focus-within:border-primary/55 focus-within:bg-white focus-within:shadow-[0_0_0_4px_rgb(var(--primary-rgb)/0.12),inset_0_1px_2px_rgb(var(--ink-rgb)/0.04)]',
-              'dark:border-foreground/12 dark:bg-background/80 dark:shadow-none',
-              'dark:hover:border-foreground/22 dark:focus-within:border-primary/45 dark:focus-within:bg-background dark:focus-within:shadow-[0_0_0_4px_rgb(var(--primary-rgb)/0.12)]',
+              'group flex items-center gap-2.5 rounded-none border-2 px-3.5 py-2.5 transition-[border-color,box-shadow] duration-100',
+              'border-foreground/40 bg-background hover:border-foreground',
+              'focus-within:border-primary focus-within:shadow-[2px_2px_0px_var(--primary)]',
             )}
           >
             <Mail
@@ -366,32 +347,27 @@ const LoginPageContent = () => {
 const LoginPageFallback = () => (
   <Card
     className={cn(
-      'auth-panel relative overflow-hidden border border-foreground/18',
-      'bg-[linear-gradient(180deg,rgb(var(--white-rgb)/0.97),rgb(var(--white-rgb)/0.88))]',
-      'shadow-[0_4px_24px_-2px_rgb(var(--ink-rgb)/0.10),0_48px_80px_-40px_rgb(var(--ink-rgb)/0.18)]',
-      'backdrop-blur-xl dark:border-foreground/12',
-      'dark:bg-[linear-gradient(180deg,rgb(var(--ink-rgb)/0.96),rgb(var(--ink-rgb)/0.88))]',
-      'dark:shadow-[0_48px_120px_-52px_rgb(var(--ink-rgb)/0.6)]',
+      'auth-panel relative overflow-hidden rounded-none border-2 border-foreground bg-background',
     )}
   >
-    <div className="absolute inset-x-0 top-0 h-px bg-linear-to-r from-transparent via-primary to-transparent" />
+    <div className="absolute inset-x-0 top-0 h-1 bg-primary" />
 
     <Card.Header className="pb-3 pt-5">
       <div className="flex items-center gap-3">
-        <div className="size-9 animate-pulse rounded-xl bg-foreground/10" />
+        <div className="size-9 animate-pulse rounded-none bg-foreground/10" />
         <div className="space-y-2">
-          <div className="h-6 w-28 animate-pulse rounded-full bg-foreground/10" />
-          <div className="h-3 w-44 animate-pulse rounded-full bg-foreground/8" />
+          <div className="h-6 w-28 animate-pulse rounded-none bg-foreground/10" />
+          <div className="h-3 w-44 animate-pulse rounded-none bg-foreground/8" />
         </div>
       </div>
     </Card.Header>
 
     <Card.Content className="space-y-4 pb-5 pt-0">
       <div className="space-y-2">
-        <div className="h-3 w-20 animate-pulse rounded-full bg-foreground/8" />
-        <div className="h-11 w-full animate-pulse rounded-xl bg-foreground/10" />
+        <div className="h-3 w-20 animate-pulse rounded-none bg-foreground/8" />
+        <div className="h-11 w-full animate-pulse rounded-none bg-foreground/10" />
       </div>
-      <div className="h-12 w-full animate-pulse rounded-[1.1rem] bg-foreground/8" />
+      <div className="h-12 w-full animate-pulse rounded-none bg-foreground/8" />
     </Card.Content>
   </Card>
 );

@@ -159,13 +159,13 @@ export const SearchModalDialog = ({
             </Dialog.Description>
 
             <Command
-              className="flex min-h-0 max-h-full w-full flex-1 flex-col overflow-hidden rounded-[2rem] border border-(--cmdk-panel-border) text-[13px] sm:text-sm"
+              className="flex min-h-0 max-h-full w-full flex-1 flex-col overflow-hidden rounded-none border-2 border-(--cmdk-panel-border) bg-(--cmdk-panel-bg) text-[13px] sm:text-sm"
               loop
               shouldFilter={false}
             >
               <div className="border-b border-(--cmdk-divider) px-4 py-4 sm:px-6">
                 <div className="flex min-w-0 items-center gap-2 sm:gap-3">
-                  <div className="flex min-w-0 flex-1 items-center gap-3 rounded-[1.35rem] border border-(--cmdk-input-border) bg-(--cmdk-input-bg) px-4 py-3 shadow-[inset_0_1px_0_var(--cmdk-input-inset)]">
+                  <div className="flex min-w-0 flex-1 items-center gap-3 rounded-none border-2 border-(--cmdk-input-border) bg-(--cmdk-input-bg) px-4 py-3 transition-[border-color,box-shadow] duration-100 focus-within:border-primary focus-within:shadow-[2px_2px_0px_var(--primary)]">
                     <Search
                       aria-hidden
                       className="size-4 shrink-0 text-(--cmdk-text-muted)"
@@ -227,12 +227,12 @@ export const SearchModalDialog = ({
 
                         return (
                           <Command.Item
-                            className="group mx-2 flex cursor-pointer items-center gap-3 rounded-2xl border border-transparent px-3 py-3 outline-none transition-colors data-[selected=true]:border-(--cmdk-item-hover-border) data-[selected=true]:bg-(--cmdk-item-hover-bg)"
+                            className="group mx-2 flex cursor-pointer items-center gap-3 rounded-none border-2 border-transparent px-3 py-3 outline-none transition-colors data-[selected=true]:border-(--cmdk-item-hover-border) data-[selected=true]:bg-(--cmdk-item-hover-bg)"
                             key={item.id}
                             onSelect={handleClose}
                             value={item.id}
                           >
-                            <span className="flex size-10 shrink-0 items-center justify-center rounded-2xl border border-(--cmdk-item-hover-border) bg-(--cmdk-icon-bg) text-(--cmdk-icon-text)">
+                            <span className="flex size-10 shrink-0 items-center justify-center rounded-none border-2 border-(--cmdk-item-hover-border) bg-(--cmdk-icon-bg) text-(--cmdk-icon-text)">
                               <Icon aria-hidden className="size-4" />
                             </span>
                             <div className="min-w-0 flex-1">
@@ -260,12 +260,12 @@ export const SearchModalDialog = ({
 
                         return (
                           <Command.Item
-                            className="group mx-2 flex cursor-pointer items-center gap-3 rounded-2xl border border-transparent px-3 py-3 outline-none transition-colors data-[selected=true]:border-(--cmdk-item-hover-border) data-[selected=true]:bg-(--cmdk-item-hover-bg)"
+                            className="group mx-2 flex cursor-pointer items-center gap-3 rounded-none border-2 border-transparent px-3 py-3 outline-none transition-colors data-[selected=true]:border-(--cmdk-item-hover-border) data-[selected=true]:bg-(--cmdk-item-hover-bg)"
                             key={action.id}
                             onSelect={handleClose}
                             value={action.id}
                           >
-                            <span className="flex size-10 shrink-0 items-center justify-center rounded-2xl border border-(--cmdk-item-hover-border) bg-(--cmdk-icon-bg) text-(--cmdk-icon-text)">
+                            <span className="flex size-10 shrink-0 items-center justify-center rounded-none border-2 border-(--cmdk-item-hover-border) bg-(--cmdk-icon-bg) text-(--cmdk-icon-text)">
                               <Icon aria-hidden className="size-4" />
                             </span>
                             <div className="min-w-0 flex-1">
@@ -295,12 +295,12 @@ export const SearchModalDialog = ({
                         <Command.Group heading="Search results">
                           {filteredResults.map((item) => (
                             <Command.Item
-                              className="group mx-2 flex cursor-pointer items-center gap-3 rounded-2xl border border-transparent px-3 py-3 outline-none transition-colors data-[selected=true]:border-(--cmdk-item-hover-border) data-[selected=true]:bg-(--cmdk-item-hover-bg)"
+                              className="group mx-2 flex cursor-pointer items-center gap-3 rounded-none border-2 border-transparent px-3 py-3 outline-none transition-colors data-[selected=true]:border-(--cmdk-item-hover-border) data-[selected=true]:bg-(--cmdk-item-hover-bg)"
                               key={item.id}
                               onSelect={handleClose}
                               value={item.id}
                             >
-                              <span className="flex size-10 shrink-0 items-center justify-center rounded-2xl border border-(--cmdk-item-hover-border) bg-(--cmdk-icon-bg) text-(--cmdk-icon-text)">
+                              <span className="flex size-10 shrink-0 items-center justify-center rounded-none border-2 border-(--cmdk-item-hover-border) bg-(--cmdk-icon-bg) text-(--cmdk-icon-text)">
                                 <FileSearch aria-hidden className="size-4" />
                               </span>
                               <div className="min-w-0 flex-1">
@@ -322,7 +322,7 @@ export const SearchModalDialog = ({
                         />
 
                         <Command.Item
-                          className="mx-2 flex cursor-pointer items-center justify-between rounded-2xl border border-(--cmdk-item-hover-border) bg-(--cmdk-icon-bg) px-4 py-3 text-[13px] font-medium text-(--cmdk-text) outline-none transition-colors data-[selected=true]:bg-(--cmdk-item-hover-bg) sm:text-sm"
+                          className="mx-2 flex cursor-pointer items-center justify-between rounded-none border-2 border-(--cmdk-item-hover-border) bg-(--cmdk-icon-bg) px-4 py-3 text-[13px] font-medium text-(--cmdk-text) outline-none transition-colors data-[selected=true]:bg-(--cmdk-item-hover-bg) sm:text-sm"
                           onSelect={handleClose}
                           value="show-results"
                         >
