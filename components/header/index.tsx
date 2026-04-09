@@ -34,7 +34,7 @@ export const Header = () => {
                 appearance="outline"
                 aria-expanded={open}
                 aria-haspopup="dialog"
-                className="sm:min-w-0 sm:max-w-sm sm:flex-1 sm:justify-between sm:px-3 sm:py-2"
+                className="sm:min-w-0 px-3 sm:max-w-sm sm:flex-1 sm:justify-between sm:px-3 sm:py-2"
                 onPress={onOpen}
                 type="button"
               >

@@ -1,18 +1,8 @@
 import type { NextRequest } from 'next/server';
 import { NextResponse } from 'next/server';
 
+import { PAGE_PATHS } from '@/constants/path';
 import { updateSession } from '@/lib/supabase/middleware';
-
-const PUBLIC_PATHS = new Set(['/login', '/auth/callback']);
-const PUBLIC_PREFIXES = ['/api/auth/'];
-
-const isPublicPath = (pathname: string) => {
-  if (PUBLIC_PATHS.has(pathname)) {
-    return true;
-  }
-
-  return PUBLIC_PREFIXES.some((prefix) => pathname.startsWith(prefix));
-};
 
 const getSafeNextPath = (request: NextRequest) => {
   const nextPath = `${request.nextUrl.pathname}${request.nextUrl.search}`;
@@ -32,13 +22,17 @@ export async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
   const { response, user } = await updateSession(request);
 
-  if (isPublicPath(pathname)) {
+  const isDashboardRoute =
+    pathname === PAGE_PATHS.dashboard ||
+    pathname.startsWith(`${PAGE_PATHS.dashboard}/`);
+
+  if (!isDashboardRoute) {
     return response;
   }
 
   if (!user) {
     const loginUrl = request.nextUrl.clone();
-    loginUrl.pathname = '/login';
+    loginUrl.pathname = PAGE_PATHS.login;
     loginUrl.search = '';
 
     const nextPath = getSafeNextPath(request);

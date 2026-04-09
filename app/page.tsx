@@ -1,7 +1,5 @@
-import { DriveIndexContent } from '@/components/ui/home/DriveIndexContent';
+import { redirect } from 'next/navigation';
 
-const Home = () => {
-  return <DriveIndexContent />;
-};
-
-export default Home;
+export default function Home() {
+  redirect('/file/0/');
+}

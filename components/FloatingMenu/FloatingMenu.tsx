@@ -3,17 +3,23 @@
 import type { Key } from 'react';
 import type { Theme } from '@/context/theme';
 import { Header, ListBox, Popover, Separator } from '@heroui/react';
-import { LayoutGrid, LogOut, Rows3, SlidersHorizontal } from 'lucide-react';
+import {
+  LayoutGrid,
+  LogIn,
+  LogOut,
+  Rows3,
+  SlidersHorizontal,
+} from 'lucide-react';
 import { usePathname, useRouter } from 'next/navigation';
 import { startTransition, useSyncExternalStore } from 'react';
 
 import { THEME_ICONS } from '@/constants/icon';
+import { HEADERLESS_PATHS, PAGE_PATHS } from '@/constants/path';
 import { THEMES } from '@/context/theme';
 import { useTheme } from '@/context/useTheme';
 import { useViewMode } from '@/context/useViewMode';
 import { useSignOut } from '@/hooks/useAuth';
-
-const HEADERLESS_PATHS = ['/login', '/auth/callback'];
+import { useAuthUser } from '@/hooks/useAuthUser';
 
 const THEME_LABELS: Record<Theme, string> = {
   light: 'Light',
@@ -41,6 +47,7 @@ export const FloatingMenu = () => {
   const router = useRouter();
   const { setTheme, theme } = useTheme();
   const { setViewMode, viewMode } = useViewMode();
+  const { isLoading: isAuthUserLoading, user } = useAuthUser();
   const { trigger: triggerSignOut, isMutating: isSigningOut } = useSignOut();
   // Avoid hydration mismatch while resolving current theme icon.
   const mounted = useSyncExternalStore(
@@ -61,10 +68,14 @@ export const FloatingMenu = () => {
   const signOut = () => {
     void triggerSignOut()
       .then(() => {
-        router.replace('/login');
+        router.replace(PAGE_PATHS.login);
         router.refresh();
       })
       .catch(() => null);
+  };
+
+  const goToLogin = () => {
+    router.push(PAGE_PATHS.login);
   };
 
   return (
@@ -156,35 +167,54 @@ export const FloatingMenu = () => {
               </ListBox.Section>
             </ListBox>
 
-            <Separator className="my-1 border-foreground/25" />
+            {!isAuthUserLoading && (
+              <>
+                <Separator className="my-1 border-foreground/25" />
 
-            <ListBox
-              aria-label="Account actions"
-              className="bg-transparent p-0"
-              selectionMode="none"
-              onAction={(key) => {
-                if (key === 'logout') {
-                  signOut();
-                }
-              }}
-            >
-              <ListBox.Section>
-                <Header className="px-2 pt-1.5 pb-1 text-[8px] font-semibold uppercase tracking-[0.12em] text-foreground/40">
-                  Account
-                </Header>
-                <ListBox.Item
-                  id="logout"
-                  isDisabled={isSigningOut}
-                  textValue="Logout"
-                  variant="danger"
+                <ListBox
+                  aria-label="Account actions"
+                  className="bg-transparent p-0"
+                  selectionMode="none"
+                  onAction={(key) => {
+                    if (key === 'login') {
+                      goToLogin();
+                    }
+
+                    if (key === 'logout') {
+                      signOut();
+                    }
+                  }}
                 >
-                  <div className="flex w-full items-center gap-2">
-                    <LogOut aria-hidden className="size-4" />
-                    <span>{isSigningOut ? 'Signing out...' : 'Logout'}</span>
-                  </div>
-                </ListBox.Item>
-              </ListBox.Section>
-            </ListBox>
+                  <ListBox.Section>
+                    <Header className="px-2 pt-1.5 pb-1 text-[8px] font-semibold uppercase tracking-[0.12em] text-foreground/40">
+                      Account
+                    </Header>
+                    {user ? (
+                      <ListBox.Item
+                        id="logout"
+                        isDisabled={isSigningOut}
+                        textValue="Logout"
+                        variant="danger"
+                      >
+                        <div className="flex w-full items-center gap-2">
+                          <LogOut aria-hidden className="size-4" />
+                          <span>
+                            {isSigningOut ? 'Signing out...' : 'Logout'}
+                          </span>
+                        </div>
+                      </ListBox.Item>
+                    ) : (
+                      <ListBox.Item id="login" textValue="Login">
+                        <div className="flex w-full items-center gap-2">
+                          <LogIn aria-hidden className="size-4" />
+                          <span>Login</span>
+                        </div>
+                      </ListBox.Item>
+                    )}
+                  </ListBox.Section>
+                </ListBox>
+              </>
+            )}
           </Popover.Dialog>
         </Popover.Content>
       </Popover>

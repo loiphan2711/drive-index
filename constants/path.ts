@@ -1,5 +1,6 @@
 export const PAGE_PATHS = {
   home: '/',
+  dashboard: '/dashboard',
   login: '/login',
   authCallback: '/auth/callback',
 };

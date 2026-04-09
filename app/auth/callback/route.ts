@@ -1,10 +1,11 @@
 import { NextResponse } from 'next/server';
 
+import { PAGE_PATHS } from '@/constants/path';
 import { createClient } from '@/lib/supabase/server';
 
 const getSafeRedirectPath = (candidate: string | null) => {
   if (!candidate || !candidate.startsWith('/') || candidate.startsWith('//')) {
-    return '/';
+    return PAGE_PATHS.dashboard;
   }
 
   return candidate;
