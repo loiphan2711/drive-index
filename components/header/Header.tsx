@@ -4,8 +4,8 @@ import { Kbd } from '@heroui/react';
 import { Search } from 'lucide-react';
 import { usePathname } from 'next/navigation';
 
+import { Button } from '@/components/common/Button';
 import { SearchModal } from '@/components/SearchModal';
-import { Button } from '@/components/ui/Button';
 
 const HEADERLESS_PATHS = ['/login', '/auth/callback'];
 

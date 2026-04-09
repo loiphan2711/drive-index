@@ -14,9 +14,9 @@ import {
 import { useRouter, useSearchParams } from 'next/navigation';
 import { Suspense, useEffect, useMemo, useRef, useState } from 'react';
 
-import { Button } from '@/components/ui/Button';
+import { Button } from '@/components/common/Button';
 
-import { OtpInput } from '@/components/ui/OtpInput';
+import { OtpInput } from '@/components/common/OtpInput';
 
 type AuthStep = 'email' | 'otp';
 

@@ -21,7 +21,7 @@ import {
   useState,
 } from 'react';
 
-import { Button } from '@/components/ui/Button';
+import { Button } from '@/components/common/Button';
 import {
   KEYBOARD_SHORTCUTS,
   MOCK_SEARCH_RESULTS,

@@ -1,6 +1,6 @@
 import type { SearchCategory } from '@/type/search-dialog';
 
-import { Button } from '@/components/ui/Button';
+import { Button } from '@/components/common/Button';
 import { SEARCH_CATEGORY_LOOKUP } from '@/constants/search';
 
 type FilterTagProps = {
