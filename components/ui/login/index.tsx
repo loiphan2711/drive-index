@@ -11,10 +11,10 @@ import { useEffect, useMemo, useRef, useState } from 'react';
 
 import { Button } from '@/components/common/Button';
 import { OtpInput } from '@/components/common/OtpInput';
+import { StatusBanner } from '@/components/common/StatusBanner';
 import { useSendOtp, useVerifyOtp } from '@/hooks/useAuth';
 import { getSafeNextPath } from '@/utils/path';
 import { CardShell } from './CardShell';
-import { StatusBanner } from './StatusBanner';
 
 const OTP_LENGTH = 8;
 
