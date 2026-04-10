@@ -30,10 +30,10 @@ export const CardShell = ({ step, subtitle, children }: CardShellProps) => (
         </div>
 
         <div className="min-w-0">
-          <h1 className="font-display text-xl tracking-wide uppercase">
+          <h1 className="font-display text-xl tracking-wide uppercase sm:text-2xl">
             Drive Index
           </h1>
-          <p className="text-xs text-foreground/50">{subtitle}</p>
+          <p className="text-sm text-foreground/50">{subtitle}</p>
         </div>
       </div>
     </Card.Header>

@@ -109,7 +109,7 @@ export const FloatingMenu = () => {
               }}
             >
               <ListBox.Section>
-                <Header className="px-2 pt-1.5 pb-1 text-[8px] font-semibold uppercase tracking-[0.12em] text-foreground/40">
+                <Header className="px-2 pt-1.5 pb-1 text-[10px] font-semibold uppercase tracking-[0.12em] text-foreground/40 sm:text-[11px]">
                   View Mode
                 </Header>
                 <ListBox.Item id="grid" textValue="Grid">
@@ -148,7 +148,7 @@ export const FloatingMenu = () => {
               }}
             >
               <ListBox.Section>
-                <Header className="px-2 pt-1.5 pb-1 text-[8px] font-semibold uppercase tracking-[0.12em] text-foreground/40">
+                <Header className="px-2 pt-1.5 pb-1 text-[10px] font-semibold uppercase tracking-[0.12em] text-foreground/40 sm:text-[11px]">
                   Theme
                 </Header>
                 {THEMES.map((nextTheme) => (
@@ -186,7 +186,7 @@ export const FloatingMenu = () => {
                   }}
                 >
                   <ListBox.Section>
-                    <Header className="px-2 pt-1.5 pb-1 text-[8px] font-semibold uppercase tracking-[0.12em] text-foreground/40">
+                    <Header className="px-2 pt-1.5 pb-1 text-[10px] font-semibold uppercase tracking-[0.12em] text-foreground/40 sm:text-[11px]">
                       Account
                     </Header>
                     {user ? (

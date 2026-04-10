@@ -17,7 +17,7 @@ export const StatusBanner = ({ children, tone }: StatusBannerProps) => {
   return (
     <div
       className={cn(
-        'auth-banner shadow-pixel-sm flex items-start gap-3 rounded-none border-2 px-4 py-3 text-[12.5px] leading-relaxed',
+        'auth-banner shadow-pixel-sm flex items-start gap-3 rounded-none border-2 px-4 py-3 text-xs leading-relaxed sm:text-sm',
         isError
           ? 'border-danger bg-danger/10 text-danger'
           : 'border-accent-green bg-accent-green/10 text-accent-green',

@@ -7,11 +7,11 @@ export default function NotFound() {
   return (
     <div className="flex flex-1 items-center justify-center px-4 py-16">
       <div className="flex w-full max-w-md flex-col items-center gap-8 border-dotted-2 border-foreground bg-background p-8 text-center shadow-pixel">
-        <p className="font-display text-[10px] uppercase tracking-[0.22em] text-primary">
+        <p className="font-display text-[11px] uppercase tracking-[0.22em] text-primary sm:text-[12px]">
           Game Over
         </p>
 
-        <div className="font-display text-6xl leading-none text-foreground">
+        <div className="font-display text-4xl leading-none text-foreground sm:text-6xl">
           404
         </div>
 
@@ -26,10 +26,10 @@ export default function NotFound() {
         </svg>
 
         <div className="flex flex-col gap-2">
-          <p className="font-display text-sm uppercase text-foreground">
+          <p className="font-display text-sm uppercase text-foreground sm:text-base">
             Ghost Ate Your Page
           </p>
-          <p className="font-mono text-xs text-foreground/55">
+          <p className="font-mono text-sm text-foreground/55">
             The path you entered does not exist.
             <br />
             Insert coin to continue.

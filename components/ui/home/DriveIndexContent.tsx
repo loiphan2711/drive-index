@@ -56,7 +56,7 @@ function DriveItemBadge({
 
   return (
     <span
-      className={`inline-flex items-center justify-center rounded-none text-[10px] font-semibold uppercase tracking-[0.22em] ${iconOnly ? 'px-1.5 py-1' : 'gap-1.5 px-2.5 py-1'} ${badgeClassName}`}
+      className={`inline-flex items-center justify-center rounded-none text-[11px] font-semibold uppercase tracking-[0.22em] sm:text-[12px] ${iconOnly ? 'px-1.5 py-1' : 'gap-1.5 px-2.5 py-1'} ${badgeClassName}`}
     >
       <Icon aria-hidden className="size-3" />
       {iconOnly ? <span className="sr-only">{style.label}</span> : style.label}
@@ -113,10 +113,10 @@ function DriveGrid({ items }: { items: DriveItem[] }) {
             </div>
 
             <div className="px-3 pb-3 pt-2">
-              <p className="truncate text-xs font-semibold tracking-tight text-foreground">
+              <p className="truncate text-sm font-semibold tracking-tight text-foreground">
                 {item.name}
               </p>
-              <p className="mt-0.5 truncate text-[11px] text-foreground/50">
+              <p className="mt-0.5 truncate text-[12px] text-foreground/50 sm:text-xs">
                 {item.location}
               </p>
             </div>
@@ -124,7 +124,7 @@ function DriveGrid({ items }: { items: DriveItem[] }) {
             <div className="mx-3 h-px bg-foreground/8" />
 
             <div className="flex items-center justify-between gap-2 px-3 py-2">
-              <p className="truncate text-[11px] text-foreground/50">
+              <p className="truncate text-[12px] text-foreground/50 sm:text-xs">
                 {item.modifiedAt}
                 <span className="mx-1 text-foreground/30">·</span>
                 {item.size}
@@ -141,7 +141,7 @@ function DriveTable({ items }: { items: DriveItem[] }) {
   return (
     <div className="overflow-hidden rounded-none border-2 border-foreground/30 bg-background shadow-pixel">
       <table className="w-full border-collapse text-left">
-        <thead className="bg-foreground/8 text-[11px] uppercase tracking-[0.22em] text-foreground/45">
+        <thead className="bg-foreground/8 text-[12px] uppercase tracking-[0.22em] text-foreground/45 sm:text-xs">
           <tr>
             <th className="px-4 py-3 font-semibold sm:px-6">Name</th>
             <th className="hidden px-4 py-3 font-semibold md:table-cell">
@@ -159,7 +159,7 @@ function DriveTable({ items }: { items: DriveItem[] }) {
             return (
               <tr
                 key={item.id}
-                className="border-t border-foreground/8 text-sm text-foreground/75 transition-colors duration-100 hover:bg-primary/8"
+                className="border-t border-foreground/8 text-sm text-foreground/75 transition-colors duration-100 hover:bg-primary/8 sm:text-base"
               >
                 <td className="px-4 py-4 sm:px-6">
                   <div className="flex items-center gap-3">
@@ -172,7 +172,7 @@ function DriveTable({ items }: { items: DriveItem[] }) {
                       <div className="truncate font-semibold text-foreground">
                         {item.name}
                       </div>
-                      <div className="truncate text-xs text-foreground/55">
+                      <div className="truncate text-sm text-foreground/55">
                         {item.location}
                       </div>
                     </div>

@@ -20,10 +20,10 @@ export const Header = () => {
       <header className="sticky top-0 z-40 border-b-2 border-foreground bg-default">
         <div className="mx-auto flex h-16 w-full max-w-7xl items-center gap-3 px-4 sm:px-6 lg:px-8">
           <div className="min-w-0 flex-1">
-            <p className="text-[8px] font-medium uppercase tracking-[0.12em] text-foreground/45">
+            <p className="text-[10px] font-medium uppercase tracking-[0.12em] text-foreground/45 sm:text-[11px]">
               Workspace
             </p>
-            <h1 className="truncate font-display text-xl tracking-wide uppercase">
+            <h1 className="truncate font-display text-xl tracking-wide uppercase sm:text-2xl">
               Drive Index
             </h1>
           </div>
@@ -44,7 +44,7 @@ export const Header = () => {
                     Search files...
                   </span>
                 </span>
-                <span className="hidden items-center gap-1 text-xs text-foreground/45 sm:flex">
+                <span className="hidden items-center gap-1 text-sm text-foreground/45 sm:flex">
                   <Kbd>
                     <Kbd.Abbr keyValue="ctrl" />
                   </Kbd>

@@ -115,7 +115,7 @@ export const LoginPageContent = () => {
         <form className="space-y-4" onSubmit={handleSendOtp}>
           <label
             htmlFor="email"
-            className="block text-[10px] font-semibold uppercase tracking-[0.24em] text-foreground/45"
+            className="block text-[11px] font-semibold uppercase tracking-[0.24em] text-foreground/45 sm:text-[12px]"
           >
             Work email
           </label>
@@ -144,7 +144,7 @@ export const LoginPageContent = () => {
               enterKeyHint="go"
               placeholder="you@company.com"
               spellCheck={false}
-              className="flex-1 border-0 bg-transparent p-0 text-sm text-foreground outline-none placeholder:text-foreground/28"
+              className="flex-1 border-0 bg-transparent p-0 text-sm text-foreground outline-none placeholder:text-foreground/28 sm:text-base"
             />
           </div>
 
@@ -175,14 +175,14 @@ export const LoginPageContent = () => {
         </form>
       ) : (
         <form className="space-y-4" onSubmit={handleVerifyOtp}>
-          <p className="text-xs text-foreground/50">
+          <p className="text-sm text-foreground/50">
             Code sent to{' '}
             <span className="font-semibold text-foreground/85">{email}</span>
           </p>
 
           <OtpInput autoFocusFirst value={otp} onChange={setOtp} />
 
-          <p className="text-right text-[10px] tabular-nums text-foreground/35">
+          <p className="text-right text-[11px] tabular-nums text-foreground/35 sm:text-[12px]">
             {otp.length}/{OTP_LENGTH}
           </p>
 

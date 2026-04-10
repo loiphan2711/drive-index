@@ -8,7 +8,7 @@ export const buttonVariants = tv({
     appearance: {
       primary: [
         'h-12 rounded-none border-2 border-foreground bg-primary',
-        'px-4 text-[10px] font-normal uppercase tracking-[0.12em] text-white',
+        'px-4 text-[11px] font-normal uppercase tracking-[0.12em] text-white sm:text-[12px]',
         'shadow-pixel transition-[transform,box-shadow] duration-100',
         'hover:translate-x-[4px] hover:translate-y-[4px] hover:shadow-none',
         'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background',
@@ -16,7 +16,7 @@ export const buttonVariants = tv({
       ],
       secondary: [
         'h-11 rounded-none border-2 border-foreground bg-background',
-        'px-4 text-[10px] font-normal uppercase tracking-[0.10em] text-foreground',
+        'px-4 text-[11px] font-normal uppercase tracking-[0.10em] text-foreground sm:text-[12px]',
         'shadow-pixel-sm transition-[transform,box-shadow,border-color,background-color,color] duration-100',
         'hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-none',
         'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background',
@@ -35,7 +35,7 @@ export const buttonVariants = tv({
       ],
       filter: [
         'h-auto rounded-none border-dotted-2 px-3 py-1.5',
-        'text-[10px] font-normal uppercase tracking-[0.10em]',
+        'text-[11px] font-normal uppercase tracking-[0.10em] sm:text-[12px]',
         'transition-colors',
         'border-(--cmdk-kbd-border) bg-(--cmdk-icon-bg) text-(--cmdk-text-muted)',
         'hover:border-(--cmdk-item-hover-border) hover:bg-(--cmdk-item-hover-bg) hover:text-(--cmdk-text)',
