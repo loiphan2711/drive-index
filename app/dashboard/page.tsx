@@ -4,29 +4,9 @@ import { redirect } from 'next/navigation';
 import { buttonVariants } from '@/components/common/Button';
 import { PAGE_PATHS } from '@/constants/path';
 import { createClient } from '@/lib/supabase/server';
+import { getDisplayName } from '@/utils/user';
 
-const getDisplayName = (
-  metadata: Record<string, unknown>,
-  email: string | undefined,
-) => {
-  const candidateKeys = [
-    'name',
-    'full_name',
-    'user_name',
-    'preferred_username',
-  ];
-
-  for (const key of candidateKeys) {
-    const value = metadata[key];
-    if (typeof value === 'string' && value.trim()) {
-      return value.trim();
-    }
-  }
-
-  return email ?? 'Player One';
-};
-
-export default async function DashboardPage() {
+export const DashboardPage = async () => {
   const supabase = await createClient();
   const {
     data: { user },
@@ -113,4 +93,6 @@ export default async function DashboardPage() {
       </div>
     </div>
   );
-}
+};
+
+export default DashboardPage;

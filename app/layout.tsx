@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { Press_Start_2P, Space_Mono } from 'next/font/google';
 
 import { PacmanBackground } from '@/components/background';
+import { Toaster } from '@/components/common/Toaster';
 import { FloatingMenu } from '@/components/FloatingMenu';
 import { Header } from '@/components/header';
 import { ThemeProvider } from '@/context/ThemeContext';
@@ -51,6 +52,7 @@ export default function RootLayout({
                 <FloatingMenu />
                 <div className="flex flex-1 flex-col">{children}</div>
               </div>
+              <Toaster />
             </ViewModeProvider>
           </ThemeProvider>
         </SWRProvider>

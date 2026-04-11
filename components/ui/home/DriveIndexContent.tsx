@@ -196,7 +196,7 @@ function DriveTable({ items }: { items: DriveItem[] }) {
   );
 }
 
-export function DriveIndexContent() {
+export const DriveIndexContent = () => {
   const { viewMode } = useViewMode();
   const { data: items = [] } = useDriveItems();
 
@@ -211,4 +211,4 @@ export function DriveIndexContent() {
       </main>
     </div>
   );
-}
+};
