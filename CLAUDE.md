@@ -28,20 +28,71 @@ Hooks run automatically — do not bypass them:
 
 ## Architecture
 
-**Next.js 16 App Router** project — all routes live under `app/`. Current structure:
+**Next.js 16 App Router** with React Compiler enabled (`reactCompiler: true` in `next.config.ts`).
 
-- `app/layout.tsx` — Root layout (Geist fonts, global CSS wrapper)
-- `app/page.tsx` — Homepage (`/`)
-- `app/globals.css` — Tailwind v4 global styles + CSS custom properties for theming
+### Routes (`app/`)
 
-### Key Conventions
+- `app/page.tsx` — Redirects to `/file/0/`
+- `app/file/[...path]/page.tsx` — Main file browser (catch-all route)
+- `app/dashboard/page.tsx` — Protected user dashboard
+- `app/login/page.tsx` — OTP-based login (email → 8-digit OTP)
+- `app/auth/callback/route.ts` — Supabase auth callback
+- `app/api/auth/send-otp/route.ts` — Sends OTP via Supabase
+- `app/api/auth/verify-otp/route.ts` — Verifies OTP and creates session
+- `app/not-found.tsx` — Retro 404 page
 
-- **Tailwind v4**: Uses `@import 'tailwindcss'` and `@theme` blocks in CSS — there is no `tailwind.config.js`. Configured via PostCSS (`@tailwindcss/postcss`).
-- **Path alias**: `@/` maps to the project root (e.g., `import x from '@/app/utils'`).
-- **Type-only**: ESLint enforces `type` over `interface` for all type definitions.
+### Key Directories
+
+- `components/common/` — Primitive UI components (Button, Input, Label, OtpInput, StatusBanner, Toaster). Each has a `variants.ts` using HeroUI's `tv()` for variant definitions.
+- `components/ui/` — Feature-level components grouped by page (`home/`, `login/`)
+- `components/SearchModal/` — Command-palette modal (Ctrl/Cmd+K), uses `cmdk`
+- `components/header/` — Sticky header, hidden on login/callback routes
+- `components/background/` — Pacman CSS animation background
+- `context/` — React contexts with co-located hook and type files (ThemeContext, ViewModeContext)
+- `hooks/` — SWR data-fetching hooks (`useDriveItems`, `useAuth`, `useAuthUser`)
+- `lib/supabase/` — Separate `client.ts` (browser) and `server.ts` (RSC/API routes) Supabase instances
+- `lib/swr/` — SWR provider (`revalidateOnFocus: false`, `shouldRetryOnError: false`) and custom fetcher
+- `services/` — Supabase calls abstracted from hooks (`auth.ts`, `drive.ts`)
+- `type/` — Shared TypeScript types (not `types/`)
+- `constants/` — Static mappings (file-type icons, path names, search config)
+- `utils/` — Pure helper functions
+
+### Authentication
+
+Supabase OTP-based auth. Middleware (`middleware.ts`) runs on all routes, refreshes session cookies, and redirects unauthenticated users from `/dashboard` to `/login?next=...`. Protected server components call `await createClient()` (server instance) to get the session.
+
+### Environment Variables
+
+```env
+NEXT_PUBLIC_SUPABASE_URL=
+NEXT_PUBLIC_SUPABASE_PUBLISHABLE_DEFAULT_KEY=
+ALLOWED_EMAILS=          # Comma-separated list of allowed login emails
+```
+
+## Key Conventions
+
+- **Tailwind v4**: `@import 'tailwindcss'` + `@theme` blocks in `globals.css` — no `tailwind.config.js`. Configured via PostCSS (`@tailwindcss/postcss`).
+- **Path alias**: `@/` maps to the project root.
+- **Type-only**: ESLint enforces `type` over `interface`.
 - **No `any`**: `@typescript-eslint/no-explicit-any` is set to `error`.
-- **RSC by default**: All components are React Server Components unless `'use client'` is explicitly declared.
-- **Dark mode**: Handled via `prefers-color-scheme` CSS media query, not a JS/class toggle.
+- **RSC by default**: Components are Server Components unless `'use client'` is declared.
+- **Dark mode**: CSS `prefers-color-scheme` media query — not class-based or JS-toggled.
+- **HeroUI variants**: All component styling via HeroUI's `tv()` utility in co-located `variants.ts` files.
+- **SWR mutations**: Auth mutations (`useSendOtp`, `useVerifyOtp`) defined in hooks, not services.
+
+## Design System
+
+**Retro gaming aesthetic** — pixelated, sharp corners, Pacman-inspired:
+
+- **Fonts**: `Press Start 2P` (display/headings) + `Space Mono` (body). Applied via CSS variables `--font-press-start` and `--font-space-mono`.
+- **No border-radius**: Everything uses `rounded-none` for a pixelated look.
+- **Pixel shadows**: `box-shadow: 4px 4px 0px var(--foreground)` — defined as `.shadow-pixel` / `.shadow-pixel-sm` / `.shadow-pixel-primary` CSS utilities.
+- **Colors** (CSS custom properties in `globals.css`):
+  - Primary: `#2a3fe5` (blue)
+  - Secondary: `#f4b9b0` (coral)
+  - Background: `#ffffff` / `#000000` (dark)
+- **File-type accents**: Each file category has a distinct border-top color on cards (blue=doc, amber=folder, etc.)
+- **Hover effects**: Buttons/cards shift via `translate` (2–4px) mirroring shadow lift.
 
 ## CI Pipeline
 
