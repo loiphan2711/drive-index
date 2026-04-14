@@ -47,7 +47,11 @@ export const FloatingMenu = () => {
   const router = useRouter();
   const { setTheme, theme } = useTheme();
   const { setViewMode, viewMode } = useViewMode();
-  const { isLoading: isAuthUserLoading, user } = useAuthUser();
+  const {
+    isLoading: isAuthUserLoading,
+    user,
+    refresh: refreshAuthUser,
+  } = useAuthUser();
   const { trigger: triggerSignOut, isMutating: isSigningOut } = useSignOut();
   // Avoid hydration mismatch while resolving current theme icon.
   const mounted = useSyncExternalStore(
@@ -68,6 +72,7 @@ export const FloatingMenu = () => {
   const signOut = () => {
     void triggerSignOut()
       .then(() => {
+        void refreshAuthUser(null, { revalidate: false });
         router.replace(PAGE_PATHS.login);
         router.refresh();
       })

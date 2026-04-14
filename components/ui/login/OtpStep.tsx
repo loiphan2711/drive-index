@@ -4,11 +4,13 @@ import type { FormEvent } from 'react';
 import { ArrowLeft, ArrowRight } from 'lucide-react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { useMemo, useState } from 'react';
+import { useSWRConfig } from 'swr';
 
 import { Button } from '@/components/common/Button';
 import { OtpInput } from '@/components/common/OtpInput';
 import { StatusBanner } from '@/components/common/StatusBanner';
 import { useVerifyOtp } from '@/hooks/useAuth';
+import { AUTH_USER_SWR_KEY } from '@/hooks/useAuthUser';
 import { getSafeNextPath } from '@/utils/path';
 
 type OtpStepProps = {
@@ -20,6 +22,7 @@ type OtpStepProps = {
 export const OtpStep = ({ email, onBack, otpLength }: OtpStepProps) => {
   const router = useRouter();
   const searchParams = useSearchParams();
+  const { mutate } = useSWRConfig();
   const { trigger: triggerVerifyOtp, isMutating: isVerifyingOtp } =
     useVerifyOtp();
   const nextPath = useMemo(
@@ -42,6 +45,7 @@ export const OtpStep = ({ email, onBack, otpLength }: OtpStepProps) => {
 
     try {
       await triggerVerifyOtp({ email, otp });
+      void mutate(AUTH_USER_SWR_KEY);
       router.push(nextPath);
       router.refresh();
     } catch (cause) {
